@@ -208,15 +208,15 @@ public class JFSTMerge {
 	}
 
 	public static void main(String[] args) {
-		JFSTMerge merger = new JFSTMerge();
-		merger.run(args);
-		System.exit(conflictState);
+//		JFSTMerge merger = new JFSTMerge();
+//		merger.run(args);
+//		System.exit(conflictState);
 
-		/*		new JFSTMerge().mergeFiles(
-						new File("C:/Users/Guilherme/Desktop/test/projects/sisbol/revisions/rev_0533511_8d296b5/rev_left_0533511/sisbol-core/src/main/java/br/mil/eb/cds/sisbol/boletim/util/Messages.java"),
-						new File("C:/Users/Guilherme/Desktop/test/projects/sisbol/revisions/rev_0533511_8d296b5/rev_base_7004707/sisbol-core/src/main/java/br/mil/eb/cds/sisbol/boletim/util/Messages.java"),
-						new File("C:/Users/Guilherme/Desktop/test/projects/sisbol/revisions/rev_0533511_8d296b5/rev_right_8d296b5/sisbol-core/src/main/java/br/mil/eb/cds/sisbol/boletim/util/Messages.java"),
-						null);*/
+				new JFSTMerge().mergeFiles(
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\left.java"),
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\base.java"),
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\right.java"),
+						null);
 
 		/*		try {
 			List<String> listRevisions = new ArrayList<>();
