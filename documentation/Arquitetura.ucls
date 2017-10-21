@@ -96,7 +96,7 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="br.ufpe.cin.parser.JParser" project="jFSTMerge" 
+  <class id="11" language="java" name="br.ufpe.cin.parser.CSSParser" project="jFSTMerge"
     file="/jFSTMerge/src/br/ufpe/cin/parser/JParser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="880" y="654"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
