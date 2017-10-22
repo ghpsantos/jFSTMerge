@@ -1,5 +1,5 @@
 /*
-gjcc@cin.ufpe.br: Modified to support Java 8:
+ghps@cin.ufpe.br: Modified to support CSS:
 
 Per Sreenivasa Viswanadha (as posted on the javacc user mailing list), the
 original java 1.5 grammar is licensed under the BSD license, so this modified
@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 options {
   /*UNICODE_INPUT = true;*/
   /*JAVA_UNICODE_ESCAPE = false;*/
-  JAVA_UNICODE_ESCAPE = true;
+  /*JAVA_UNICODE_ESCAPE = true;*/
   ERROR_REPORTING = true;
   STATIC = false;
 }
@@ -56,7 +56,7 @@ PARSER_END(CSSMergeParser)
 
 
 /********************************************
- * THE JAVA TOKEN SPECIFICATION STARTS HERE *
+ * THE CSS TOKEN SPECIFICATION STARTS HERE *
  ********************************************/
 
 /* WHITE SPACE */
@@ -75,23 +75,7 @@ SPECIAL_TOKEN :
 
 MORE :
 {
-  "//" { input_stream.backup(2); } : IN_SINGLE_LINE_COMMENT
-|
-  <"/**" ~["/"]> { input_stream.backup(1); } : IN_FORMAL_COMMENT
-|
   "/*" : IN_MULTI_LINE_COMMENT
-}
-
-<IN_SINGLE_LINE_COMMENT>
-SPECIAL_TOKEN :
-{
-  < SINGLE_LINE_COMMENT: "//"(~["\n","\r"])* ("\n"|"\r"|"\r\n")? > : DEFAULT
-}
-
-<IN_FORMAL_COMMENT>
-SPECIAL_TOKEN :
-{
-  <FORMAL_COMMENT: "*/" > : DEFAULT
 }
 
 <IN_MULTI_LINE_COMMENT>
@@ -100,125 +84,12 @@ SPECIAL_TOKEN :
   <MULTI_LINE_COMMENT: "*/" > : DEFAULT
 }
 
-<IN_SINGLE_LINE_COMMENT,IN_FORMAL_COMMENT,IN_MULTI_LINE_COMMENT>
+<IN_MULTI_LINE_COMMENT>
 MORE :
 {
   < ~[] >
 }
 
-/* RESERVED WORDS AND LITERALS */
-
-TOKEN :
-{
-  < ABSTRACT: "abstract" >
-| < ASSERT: "assert" >
-| < BOOLEAN: "boolean" >
-| < BREAK: "break" >
-| < BYTE: "byte" >
-| < CASE: "case" >
-| < CATCH: "catch" >
-| < CHAR: "char" >
-| < CLASS: "class" >
-| < CONST: "const" >
-| < CONTINUE: "continue" >
-| < _DEFAULT: "default" >
-| < DO: "do" >
-| < DOUBLE: "double" >
-| < ELSE: "else" >
-| < ENUM: "enum" >
-| < EXTENDS: "extends" >
-| < FALSE: "false" >
-| < FINAL: "final" >
-| < FINALLY: "finally" >
-| < FLOAT: "float" >
-| < FOR: "for" >
-| < GOTO: "goto" >
-| < IF: "if" >
-| < IMPLEMENTS: "implements" >
-| < IMPORT: "import" >
-| < INSTANCEOF: "instanceof" >
-| < INT: "int" >
-| < INTERFACE: "interface" >
-| < LONG: "long" >
-| < NATIVE: "native" >
-| < NEW: "new" >
-| < NULL: "null" >
-| < PACKAGE: "package">
-| < PRIVATE: "private" >
-| < PROTECTED: "protected" >
-| < PUBLIC: "public" >
-| < RETURN: "return" >
-| < SHORT: "short" >
-| < STATIC: "static" >
-| < STRICTFP: "strictfp" >
-| < SUPER: "super" >
-| < SWITCH: "switch" >
-| < SYNCHRONIZED: "synchronized" >
-| < THIS: "this" >
-| < THROW: "throw" >
-| < THROWS: "throws" >
-| < TRANSIENT: "transient" >
-| < TRUE: "true" >
-| < TRY: "try" >
-| < VOID: "void" >
-| < VOLATILE: "volatile" >
-| < WHILE: "while" >
-}
-
-
-TOKEN :
-{
-  < INTEGER_LITERAL:
-        <DECIMAL_LITERAL> (["l","L"])?
-      | <HEX_LITERAL> (["l","L"])?
-      | <BINARY_LITERAL> (["l","L"])?
-      | <OCTAL_LITERAL> (["l","L"])?
-  >
-|
-  < #DECIMAL_LITERAL: ["1"-"9"] ((["_"])*["0"-"9"])* >
-|
-  < #HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])((["_"])*["0"-"9","a"-"f","A"-"F"])* >      
-|
-  < #BINARY_LITERAL: "0" ["b","B"] (["0"-"1"])((["_"])*["0"-"1"])* >   
-|
-  < #OCTAL_LITERAL: "0" ((["_"])*(["0"-"7"]))* >      
-|
-  < FLOATING_POINT_LITERAL:
-        (["0"-"9"])((["_"])*(["0"-"9"]))* "." ((["0"-"9"])((["_"])*(["0"-"9"]))*)* (<EXPONENT>)? (["f","F","d","D"])?
-      | "." (["0"-"9"])((["_"])*(["0"-"9"]))* (<EXPONENT>)? (["f","F","d","D"])?
-      | (["0"-"9"])((["_"])*(["0"-"9"]))* <EXPONENT> (["f","F","d","D"])?
-      | (["0"-"9"])((["_"])*(["0"-"9"]))* (<EXPONENT>)? ["f","F","d","D"]
-  >
-  
-|
-  < #EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
-|
-  < CHARACTER_LITERAL:
-      "'"
-      (   (~["'","\\","\n","\r"])
-        | ("\\"
-            ( ["n","t","b","r","f","u","\\","'","\""]
-            | ["0"-"7"] ( ["0"-"7"] )?
-            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
-            )
-          )
-      )
-      "'"
-  >
-|
-  < STRING_LITERAL:
-      "\""
-      (   (~["\"","\\","\n","\r"])
-        | ("\\"
-            ( ["n","t","b","r","f","u","\\","'","\""]
-            | ["0"-"7"] ( ["0"-"7"] )?
-            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
-            )
-          )
-      )*
-      "\""
-  >
-}
 
 /* IDENTIFIERS */
 
@@ -264,88 +135,6 @@ TOKEN :
       ]
   >
 }
-
-/* SEPARATORS */
-
-TOKEN :
-{
-  < LPAREN: "(" >
-| < RPAREN: ")" >
-| < LBRACE: "{" >
-| < RBRACE: "}" >
-| < LBRACKET: "[" >
-| < RBRACKET: "]" >
-| < SEMICOLON: ";" >
-| < COMMA: "," >
-| < DOT: "." >
-| < AT: "@" >
-}
-
-/* OPERATORS */
-
-TOKEN :
-{
-  < ASSIGN: "=" >
-| < LT: "<" >
-| < BANG: "!" >
-| < TILDE: "~" >
-| < HOOK: "?" >
-| < COLON: ":" >
-| < EQ: "==" >
-| < LE: "<=" >
-| < GE: ">=" >
-| < NE: "!=" >
-| < SC_OR: "||" >
-| < SC_AND: "&&" >
-| < INCR: "++" >
-| < DECR: "--" >
-| < PLUS: "+" >
-| < MINUS: "-" >
-| < STAR: "*" >
-| < SLASH: "/" >
-| < BIT_AND: "&" >
-| < BIT_OR: "|" >
-| < XOR: "^" >
-| < REM: "%" >
-| < LSHIFT: "<<" >
-| < PLUSASSIGN: "+=" >
-| < MINUSASSIGN: "-=" >
-| < STARASSIGN: "*=" >
-| < SLASHASSIGN: "/=" >
-| < ANDASSIGN: "&=" >
-| < ORASSIGN: "|=" >
-| < XORASSIGN: "^=" >
-| < REMASSIGN: "%=" >
-| < LSHIFTASSIGN: "<<=" >
-| < RSIGNEDSHIFTASSIGN: ">>=" >
-| < RUNSIGNEDSHIFTASSIGN: ">>>=" >
-| < ELLIPSIS: "..." >
-| < POINTER: "->" >
-| < DIAMOND: "<>" >
-
-}
-
-
-TOKEN :
-{
-		/*< RUNSIGNEDSHIFT: ">>>" >
-		{
-		matchedToken.kind = GT;
-		((Token.GTToken)matchedToken).realKind = RUNSIGNEDSHIFT;
-		input_stream.backup(2);
-		}
-		| < RSIGNEDSHIFT: ">>" >
-		{
-		matchedToken.kind = GT;
-		((Token.GTToken)matchedToken).realKind = RSIGNEDSHIFT;
-		input_stream.backup(1);
-		}
-		|*/
-		< GT: ">" >
-}
-
-
-
 
 GRAMMARSTART
 
