@@ -91,6 +91,17 @@ MORE :
 }
 
 
+/* RESERVED WORDS AND LITERALS */
+/* Macro Definition */
+
+TOKEN :
+{
+  < num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
+|
+  < unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
+}
+
+/* Still java */
 /* IDENTIFIERS */
 
 TOKEN :
@@ -152,5 +163,5 @@ CompilationUnit:
 ;
 
 Id:
-        <IDENTIFIER>
+        <unicode>
 ;
