@@ -99,6 +99,10 @@ TOKEN :
   < num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
 |
   < unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
+|
+  < escape:  <unicode> | "\\"(["~""\n""\r","\f0"-"9","a"-"f"])>
+|
+  < nonascii: ["\240"-"\377"]>
 }
 
 /* Still java */
@@ -154,7 +158,7 @@ FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo Id(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<unicode> {return productionEndTerminal("Id","-","-","Replacement","Default",first,token);}
+	<nonascii> {return productionEndTerminal("Id","-","-","Replacement","Default",first,token);}
 
  )  }
 

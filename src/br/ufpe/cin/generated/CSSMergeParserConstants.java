@@ -9,9 +9,10 @@ public interface CSSMergeParserConstants {
   int MULTI_LINE_COMMENT = 7;
   int num = 9;
   int unicode = 10;
-  int IDENTIFIER = 11;
-  int LETTER = 12;
-  int DIGIT = 13;
+  int nonascii = 11;
+  int IDENTIFIER = 12;
+  int LETTER = 13;
+  int DIGIT = 14;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -28,6 +29,7 @@ public interface CSSMergeParserConstants {
     "<token of kind 8>",
     "<num>",
     "<unicode>",
+    "<nonascii>",
     "<IDENTIFIER>",
     "<LETTER>",
     "<DIGIT>",
