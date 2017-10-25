@@ -96,36 +96,35 @@ MORE :
 
 TOKEN :
 {
-  < ident: (["-"])?(<nmstart>)(<nmchar>)*>
+  <#ident: (["-"])?(<nmstart>)(<nmchar>)*>
  |
-  < name: (<nmchar>)+>
+  <#name: (<nmchar>)+>
  |
-  < num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
+  <#num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
  |
-  < #nmstart: ["_","a"-"z","A"-"Z"] | <nonascii> | <escape> >
+  <#nmstart: ["_","a"-"z","A"-"Z"] | <nonascii> | <escape> >
  |
-  < #nmchar: ["_","a"-"z","A"-"Z","0"-"9","-"] | <nonascii> | <escape> >
+  <#nmchar: ["_","a"-"z","A"-"Z","0"-"9","-"] | <nonascii> | <escape> >
  |
-  < #escape: (<unicode>) | "\\"~["\n","\r","\f","0"-"9","a"-"f"]>
+  <#escape: (<unicode>) | "\\"~["\n","\r","\f","0"-"9","a"-"f"]>
  |
-  < #unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
+  <#unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
  |
-  < #nonascii: ~["\0"-"\177"]>
+  <#nonascii: ~["\0"-"\177"]>
  |
-  <string: <string1> | <string2> >
+  <#string: <string1> | <string2> >
  |
   <#string1: "\""(~["\n","\r","\f","\\","\""] | "\\"<nl> | <escape>)*"\"">
  |
   <#string2: "\'"(~["\n","\r","\f","\\","\'"] | "\\"<nl> | <escape>)*"\'">
  |
-  <badstring: <badstring1> | <badstring2> >
+  <#badstring: <badstring1> | <badstring2> >
  |
   <#badstring1: "\""(~["\n","\r","\f","\\","\""] | "\\"<nl> | <escape>)*>
  |
   <#badstring2: "\'"(~["\n","\r","\f","\\","\'"] | "\\"<nl> | <escape>)*>
  |
   <#nl:  "\n" |"\r""\n" | "\r" |"\f">
-
 
 /*|
   <#A: "a"|("\\0"){0,4}("41"|"61")("\r""\n"|[ "\t","\r","\n","\f"])?>
@@ -134,15 +133,39 @@ TOKEN :
 |
   <comb: <A><C>>*/
 }
+
+
+/* TOKEN DEFINITION */
+
+TOKEN :
+{
+  <IDENT: <ident> >
+ |
+  <ATKEYWORD: "@"<ident> >
+ |
+  <STRING: <string> >
+ |
+  <BADSTRING: <badstring> >
+ |
+  <HASH: "#"<name> >
+ |
+  <NUMBER: <num> >
+}
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	(n=Test(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
+	(n=Any(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
 
  )  }
 
-FSTInfo Test(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+FSTInfo Any(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<string> {return productionEndTerminal("Test","-","-","Replacement","Default",first,token);}
+	<IDENT> {return productionEndTerminal("Any1","-","-","Replacement","Default",first,token);}
+ |
+	<STRING> {return productionEndTerminal("Any2","-","-","Replacement","Default",first,token);}
+ |
+	<NUMBER> {return productionEndTerminal("Any3","-","-","Replacement","Default",first,token);}
+ |
+	<HASH> {return productionEndTerminal("Any4","-","-","Replacement","Default",first,token);}
 
  )  }
 

@@ -19,7 +19,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	public boolean visit(FSTNonTerminal nonTerminal) {
 		if (nonTerminal.getType().equals("CompilationUnit")) {
 			printFeatures(nonTerminal,true);
-			for (FSTNode v : getChildren(nonTerminal,"Test")) {
+			for (FSTNode v : getChildren(nonTerminal,"Any")) {
 				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
@@ -29,6 +29,10 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	}
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
+		if (type.equals("Any4") && expectedType.equals("Any")) return true;
+		if (type.equals("Any3") && expectedType.equals("Any")) return true;
+		if (type.equals("Any2") && expectedType.equals("Any")) return true;
+		if (type.equals("Any1") && expectedType.equals("Any")) return true;
 		return false;
 	}
 }

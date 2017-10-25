@@ -22,6 +22,12 @@ public interface CSSMergeParserConstants {
   int badstring1 = 21;
   int badstring2 = 22;
   int nl = 23;
+  int IDENT = 24;
+  int ATKEYWORD = 25;
+  int STRING = 26;
+  int BADSTRING = 27;
+  int HASH = 28;
+  int NUMBER = 29;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -51,6 +57,12 @@ public interface CSSMergeParserConstants {
     "<badstring1>",
     "<badstring2>",
     "<nl>",
+    "<IDENT>",
+    "<ATKEYWORD>",
+    "<STRING>",
+    "<BADSTRING>",
+    "<HASH>",
+    "<NUMBER>",
   };
 
 }
