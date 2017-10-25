@@ -16,25 +16,26 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case nonascii:
+      case nmstart:
         ;
         break;
       default:
         jj_la1[0] = jj_gen;
         break label_1;
       }
-      n = Id(inTerminal);
-                           replaceName(n);
+      n = Escape(inTerminal);
+                               replaceName(n);
     }
-                                               {if (true) return productionEndNonTerminal("CompilationUnit","-","-");}
+    jj_consume_token(0);
+                                                         {if (true) return productionEndNonTerminal("CompilationUnit","-","-");}
     throw new Error("Missing return statement in function");
   }
 
-  final public FSTInfo Id(boolean inTerminal) throws ParseException {
-                                   Token first=null,t;FSTInfo n;
+  final public FSTInfo Escape(boolean inTerminal) throws ParseException {
+                                       Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(nonascii);
-                    {if (true) return productionEndTerminal("Id","-","-","Replacement","Default",first,token);}
+    jj_consume_token(nmstart);
+                   {if (true) return productionEndTerminal("Escape","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -48,7 +49,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1_0();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x800,};
+      jj_la1_0 = new int[] {0x400,};
    }
 
   public CSSMergeParser(CharStream stream) {
@@ -127,8 +128,8 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   public ParseException generateParseException() {
     jj_expentries.removeAllElements();
-    boolean[] la1tokens = new boolean[15];
-    for (int i = 0; i < 15; i++) {
+    boolean[] la1tokens = new boolean[14];
+    for (int i = 0; i < 14; i++) {
       la1tokens[i] = false;
     }
     if (jj_kind >= 0) {
@@ -144,7 +145,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         }
       }
     }
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 14; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
