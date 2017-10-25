@@ -19,7 +19,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	public boolean visit(FSTNonTerminal nonTerminal) {
 		if (nonTerminal.getType().equals("CompilationUnit")) {
 			printFeatures(nonTerminal,true);
-			for (FSTNode v : getChildren(nonTerminal,"Escape")) {
+			for (FSTNode v : getChildren(nonTerminal,"Test")) {
 				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);

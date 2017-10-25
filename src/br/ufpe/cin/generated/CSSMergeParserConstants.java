@@ -7,11 +7,14 @@ public interface CSSMergeParserConstants {
 
   int EOF = 0;
   int MULTI_LINE_COMMENT = 7;
-  int num = 9;
-  int nmstart = 10;
-  int escape = 11;
-  int unicode = 12;
-  int nonascii = 13;
+  int ident = 9;
+  int name = 10;
+  int num = 11;
+  int nmstart = 12;
+  int nmchar = 13;
+  int escape = 14;
+  int unicode = 15;
+  int nonascii = 16;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -26,8 +29,11 @@ public interface CSSMergeParserConstants {
     "\"/*\"",
     "\"*/\"",
     "<token of kind 8>",
+    "<ident>",
+    "<name>",
     "<num>",
     "<nmstart>",
+    "<nmchar>",
     "<escape>",
     "<unicode>",
     "<nonascii>",

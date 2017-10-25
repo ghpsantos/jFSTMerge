@@ -96,14 +96,20 @@ MORE :
 
 TOKEN :
 {
+ < ident: (["-"])?(<nmstart>)(<nmchar>)*>
+ |
+ < name: (<nmchar>)+>
+ |
   < num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
-|
-  < nmstart: ["_","a"-"z","A"-"Z"] | <nonascii> | <escape> >
-|
+ |
+  < #nmstart: ["_","a"-"z","A"-"Z"] | <nonascii> | <escape> >
+ |
+  < #nmchar: ["_","a"-"z","A"-"Z","0"-"9","-"] | <nonascii> | <escape> >
+ |
   < #escape: (<unicode>) | "\\"~["\n","\r","\f","0"-"9","a"-"f"]>
-|
+ |
   < #unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
-|
+ |
   < #nonascii: ~["\0"-"\177"]>
 
 
@@ -127,10 +133,10 @@ GRAMMARSTART
 
 @FSTNonTerminal()
 CompilationUnit:
-        (Escape)*
+        (Test)*
         <EOF>
 ;
 
-Escape:
-        <nmstart>
+Test:
+        <ident>
 ;
