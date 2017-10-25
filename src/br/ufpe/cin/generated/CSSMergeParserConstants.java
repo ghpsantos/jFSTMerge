@@ -15,6 +15,13 @@ public interface CSSMergeParserConstants {
   int escape = 14;
   int unicode = 15;
   int nonascii = 16;
+  int string = 17;
+  int string1 = 18;
+  int string2 = 19;
+  int badstring = 20;
+  int badstring1 = 21;
+  int badstring2 = 22;
+  int nl = 23;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -37,6 +44,13 @@ public interface CSSMergeParserConstants {
     "<escape>",
     "<unicode>",
     "<nonascii>",
+    "<string>",
+    "<string1>",
+    "<string2>",
+    "<badstring>",
+    "<badstring1>",
+    "<badstring2>",
+    "<nl>",
   };
 
 }

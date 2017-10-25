@@ -96,9 +96,9 @@ MORE :
 
 TOKEN :
 {
- < ident: (["-"])?(<nmstart>)(<nmchar>)*>
+  < ident: (["-"])?(<nmstart>)(<nmchar>)*>
  |
- < name: (<nmchar>)+>
+  < name: (<nmchar>)+>
  |
   < num: (["0"-"9"])+ | ((["0"-"9"])*"."(["0"-"9"]))+ >
  |
@@ -111,6 +111,20 @@ TOKEN :
   < #unicode: "\\"(["0"-"9","a"-"f"]){1,6}((["\r","\n"]) | ([ "\n","\r","\t","\f"]))?>
  |
   < #nonascii: ~["\0"-"\177"]>
+ |
+  <string: <string1> | <string2> >
+ |
+  <#string1: "\""(~["\n","\r","\f","\\","\""] | "\\"<nl> | <escape>)*"\"">
+ |
+  <#string2: "\'"(~["\n","\r","\f","\\","\'"] | "\\"<nl> | <escape>)*"\'">
+ |
+  <badstring: <badstring1> | <badstring2> >
+ |
+  <#badstring1: "\""(~["\n","\r","\f","\\","\""] | "\\"<nl> | <escape>)*>
+ |
+  <#badstring2: "\'"(~["\n","\r","\f","\\","\'"] | "\\"<nl> | <escape>)*>
+ |
+  <#nl:  "\n" |"\r""\n" | "\r" |"\f">
 
 
 /*|
@@ -138,5 +152,5 @@ CompilationUnit:
 ;
 
 Test:
-        <ident>
+        <string>
 ;
