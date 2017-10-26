@@ -29,6 +29,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       case FUNCTION:
       case INCLUDES:
       case DASHMATCH:
+      case DELIM:
         ;
         break;
       default:
@@ -105,6 +106,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         case FUNCTION:
         case INCLUDES:
         case DASHMATCH:
+        case DELIM:
           ;
           break;
         default:
@@ -135,6 +137,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         case FUNCTION:
         case INCLUDES:
         case DASHMATCH:
+        case DELIM:
           ;
           break;
         default:
@@ -165,6 +168,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         case FUNCTION:
         case INCLUDES:
         case DASHMATCH:
+        case DELIM:
           ;
           break;
         default:
@@ -176,6 +180,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       }
       jj_consume_token(RBRACKET);
                                                                 {if (true) return productionEndTerminal("Any13","-","-","Replacement","Default",first,token);}
+      break;
+    case DELIM:
+      jj_consume_token(DELIM);
+                 {if (true) return productionEndTerminal("Any14","-","-","Replacement","Default",first,token);}
       break;
     default:
       jj_la1[4] = jj_gen;
@@ -200,7 +208,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1_0 = new int[] {0xf5000000,0xf5000000,0xf5000000,0xf5000000,0xf5000000,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x3a83,0x3a83,0x3a83,0x3a83,0x3a83,};
+      jj_la1_1 = new int[] {0x7a83,0x7a83,0x7a83,0x7a83,0x7a83,};
    }
 
   public CSSMergeParser(CharStream stream) {
@@ -279,8 +287,8 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   public ParseException generateParseException() {
     jj_expentries.removeAllElements();
-    boolean[] la1tokens = new boolean[46];
-    for (int i = 0; i < 46; i++) {
+    boolean[] la1tokens = new boolean[47];
+    for (int i = 0; i < 47; i++) {
       la1tokens[i] = false;
     }
     if (jj_kind >= 0) {
@@ -299,7 +307,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         }
       }
     }
-    for (int i = 0; i < 46; i++) {
+    for (int i = 0; i < 47; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

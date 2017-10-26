@@ -176,17 +176,15 @@ TOKEN :
   <INCLUDES: "~=" >
  |
   <DASHMATCH: "|=" >
-
-
-  /*
-
-
-    #
-
-
-    #   DELIM           any other character not matched by the above rules, and neither a single
-    #                   nor a double quote
-  */
+ |
+  <DELIM: "#/\\" |
+          "@/\\" |
+          "@/-" |
+          "@/-\\" |
+          "-/\\" |
+          "-/-" |
+          "\\</!" |
+          "\\</!-">
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
@@ -221,6 +219,8 @@ FSTInfo Any(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	<LPAREN> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any12","-","-","Replacement","Default",first,token);}
  |
 	<LBRACKET> (n=Any(true){ replaceName(n);})* <RBRACKET> {return productionEndTerminal("Any13","-","-","Replacement","Default",first,token);}
+ |
+	<DELIM> {return productionEndTerminal("Any14","-","-","Replacement","Default",first,token);}
 
  )  }
 

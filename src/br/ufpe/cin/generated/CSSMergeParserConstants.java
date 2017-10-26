@@ -44,6 +44,7 @@ public interface CSSMergeParserConstants {
   int FUNCTION = 43;
   int INCLUDES = 44;
   int DASHMATCH = 45;
+  int DELIM = 46;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -95,6 +96,7 @@ public interface CSSMergeParserConstants {
     "<FUNCTION>",
     "\"~=\"",
     "\"|=\"",
+    "<DELIM>",
   };
 
 }

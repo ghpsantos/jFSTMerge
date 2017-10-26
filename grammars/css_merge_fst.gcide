@@ -176,17 +176,15 @@ TOKEN :
   <INCLUDES: "~=" >
  |
   <DASHMATCH: "|=" >
-
-
-  /*
-
-
-    #
-
-
-    #   DELIM           any other character not matched by the above rules, and neither a single
-    #                   nor a double quote
-  */
+ |
+  <DELIM: "#/\\" |
+          "@/\\" |
+          "@/-" |
+          "@/-\\" |
+          "-/\\" |
+          "-/-" |
+          "\\</!" |
+          "\\</!-">
 }
 
 GRAMMARSTART
@@ -210,7 +208,7 @@ Any:
         <NUMBER> |
         <PERCENTAGE> |
         <DIMENSION> |
-        <STRING> | /*missing delim*/
+        <STRING> |
         <URI> |
         <HASH> |
         <UNICODE_RANGE> |
@@ -218,5 +216,6 @@ Any:
         <DASHMATCH> |
         <FUNCTION> (Any)* <RPAREN> |
         <LPAREN> (Any)* <RPAREN> |
-        <LBRACKET> (Any)* <RBRACKET>
+        <LBRACKET> (Any)* <RBRACKET> |
+        <DELIM>
 ;
