@@ -157,7 +157,9 @@ TOKEN :
  |
   <CDC: "-->" >
  |
-  < SEMICOLON: ";" >
+  <SEMICOLON: ";" >
+ |
+  <COLON: ":" >
  |
   < LCURLY: "{" >
  |
@@ -188,7 +190,103 @@ TOKEN :
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	(n=Any(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
+	(n=StyleSheet(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
+
+ )  }
+
+FSTInfo StyleSheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<CDO> {return productionEndTerminal("StyleSheet1","-","-","Replacement","Default",first,token);}
+ |
+	<CDC> {return productionEndTerminal("StyleSheet2","-","-","Replacement","Default",first,token);}
+ |
+	n=Statement(true){ replaceName(n);} {return productionEndTerminal("StyleSheet3","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=RuleSet(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
+ |
+	n=AtRule(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo AtRule(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<ATKEYWORD> (n=Any(true){ replaceName(n);})* [n=InnerAtRule(true){ replaceName(n);}] {return productionEndTerminal("AtRule","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo InnerAtRule(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Block(true){ replaceName(n);} {return productionEndTerminal("InnerAtRule1","-","-","Replacement","Default",first,token);}
+ |
+	<SEMICOLON> {return productionEndTerminal("InnerAtRule2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Block(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<LCURLY> (n=InnerBlockDeclaration(true){ replaceName(n);})* <RCURLY> {return productionEndTerminal("Block","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo InnerBlockDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Any(true){ replaceName(n);} {return productionEndTerminal("InnerBlockDeclaration1","-","-","Replacement","Default",first,token);}
+ |
+	n=Block(true){ replaceName(n);} {return productionEndTerminal("InnerBlockDeclaration2","-","-","Replacement","Default",first,token);}
+ |
+	<ATKEYWORD> {return productionEndTerminal("InnerBlockDeclaration3","-","-","Replacement","Default",first,token);}
+ |
+	<SEMICOLON> {return productionEndTerminal("InnerBlockDeclaration4","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo RuleSet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	[n=Selector(true){ replaceName(n);}] <LCURLY> [n=Declaration(true){ replaceName(n);}] (n=InnerRuleSet(true){ replaceName(n);})* <RCURLY> {return productionEndTerminal("RuleSet","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo InnerRuleSet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<SEMICOLON> [n=Declaration(true){ replaceName(n);}] {return productionEndTerminal("InnerRuleSet","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Selector(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	(n=Any(true){ replaceName(n);})+ {return productionEndTerminal("Selector","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Declaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	[<DELIM>] n=Property(true){ replaceName(n);} <COLON> n=Value(true){ replaceName(n);} {return productionEndTerminal("Declaration","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Property(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<IDENT> {return productionEndTerminal("Property","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Value(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	(n=InnerValueDeclaration(true){ replaceName(n);})+ {return productionEndTerminal("Value","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo InnerValueDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Any(true){ replaceName(n);} {return productionEndTerminal("InnerValueDeclaration1","-","-","Replacement","Default",first,token);}
+ |
+	n=Block(true){ replaceName(n);} {return productionEndTerminal("InnerValueDeclaration2","-","-","Replacement","Default",first,token);}
+ |
+	<ATKEYWORD> {return productionEndTerminal("InnerValueDeclaration3","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -204,23 +302,23 @@ FSTInfo Any(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	<STRING> {return productionEndTerminal("Any5","-","-","Replacement","Default",first,token);}
  |
-	<URI> {return productionEndTerminal("Any6","-","-","Replacement","Default",first,token);}
+	<DELIM> {return productionEndTerminal("Any6","-","-","Replacement","Default",first,token);}
  |
-	<HASH> {return productionEndTerminal("Any7","-","-","Replacement","Default",first,token);}
+	<URI> {return productionEndTerminal("Any7","-","-","Replacement","Default",first,token);}
  |
-	<UNICODE_RANGE> {return productionEndTerminal("Any8","-","-","Replacement","Default",first,token);}
+	<HASH> {return productionEndTerminal("Any8","-","-","Replacement","Default",first,token);}
  |
-	<INCLUDES> {return productionEndTerminal("Any9","-","-","Replacement","Default",first,token);}
+	<UNICODE_RANGE> {return productionEndTerminal("Any9","-","-","Replacement","Default",first,token);}
  |
-	<DASHMATCH> {return productionEndTerminal("Any10","-","-","Replacement","Default",first,token);}
+	<INCLUDES> {return productionEndTerminal("Any10","-","-","Replacement","Default",first,token);}
  |
-	<FUNCTION> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any11","-","-","Replacement","Default",first,token);}
+	<DASHMATCH> {return productionEndTerminal("Any11","-","-","Replacement","Default",first,token);}
  |
-	<LPAREN> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any12","-","-","Replacement","Default",first,token);}
+	<FUNCTION> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any12","-","-","Replacement","Default",first,token);}
  |
-	<LBRACKET> (n=Any(true){ replaceName(n);})* <RBRACKET> {return productionEndTerminal("Any13","-","-","Replacement","Default",first,token);}
+	<LPAREN> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any13","-","-","Replacement","Default",first,token);}
  |
-	<DELIM> {return productionEndTerminal("Any14","-","-","Replacement","Default",first,token);}
+	<LBRACKET> (n=Any(true){ replaceName(n);})* <RBRACKET> {return productionEndTerminal("Any14","-","-","Replacement","Default",first,token);}
 
  )  }
 

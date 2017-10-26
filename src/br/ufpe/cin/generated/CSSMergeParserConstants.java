@@ -35,16 +35,17 @@ public interface CSSMergeParserConstants {
   int CDO = 34;
   int CDC = 35;
   int SEMICOLON = 36;
-  int LCURLY = 37;
-  int RCURLY = 38;
-  int LPAREN = 39;
-  int RPAREN = 40;
-  int LBRACKET = 41;
-  int RBRACKET = 42;
-  int FUNCTION = 43;
-  int INCLUDES = 44;
-  int DASHMATCH = 45;
-  int DELIM = 46;
+  int COLON = 37;
+  int LCURLY = 38;
+  int RCURLY = 39;
+  int LPAREN = 40;
+  int RPAREN = 41;
+  int LBRACKET = 42;
+  int RBRACKET = 43;
+  int FUNCTION = 44;
+  int INCLUDES = 45;
+  int DASHMATCH = 46;
+  int DELIM = 47;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -87,6 +88,7 @@ public interface CSSMergeParserConstants {
     "\"<!--\"",
     "\"-->\"",
     "\";\"",
+    "\":\"",
     "\"{\"",
     "\"}\"",
     "\"(\"",
