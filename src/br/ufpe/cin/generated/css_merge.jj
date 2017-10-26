@@ -214,7 +214,7 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo AtRule(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<ATKEYWORD> (n=Any(true){ replaceName(n);})* [n=InnerAtRule(true){ replaceName(n);}] {return productionEndTerminal("AtRule","-","-","Replacement","Default",first,token);}
+	<ATKEYWORD> (LOOKAHEAD(2) n=Any(true){ replaceName(n);})* [LOOKAHEAD(2) n=InnerAtRule(true){ replaceName(n);}] {return productionEndTerminal("AtRule","-","-","Replacement","Default",first,token);}
 
  )  }
 

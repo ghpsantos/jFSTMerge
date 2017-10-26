@@ -215,7 +215,7 @@ Statement:
 ;
 
 AtRule:
-    <ATKEYWORD> (Any)* [InnerAtRule]
+     <ATKEYWORD>  ( LOOK_AHEAD(2) Any)* [LOOK_AHEAD(2) InnerAtRule]
 ;
 
 InnerAtRule:
