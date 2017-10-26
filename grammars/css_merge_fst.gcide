@@ -126,14 +126,7 @@ TOKEN :
  |
   <#nl:  "\n" |"\r""\n" | "\r" |"\f">
 
-/*|
-  <#A: "a"|("\\0"){0,4}("41"|"61")("\r""\n"|[ "\t","\r","\n","\f"])?>
-|
-  <#C: "c"|("\\0"){0,4}("43"|"63")("\r""\n"|[ "\t","\r","\n","\f"])?>
-|
-  <comb: <A><C>>*/
 }
-
 
 /* TOKEN DEFINITION */
 
@@ -150,6 +143,50 @@ TOKEN :
   <HASH: "#"<name> >
  |
   <NUMBER: <num> >
+ |
+  <PERCENTAGE: <num>"%" >
+ |
+  <DIMENSION: <num><ident> >
+ |
+  <URI: "url("<string>")" |
+         "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
+ |
+  <UNICODE_RANGE:  "U+"((["0"-"9","A"-"F"])?){1,6}("-"(["0"-"9","A"-"F"]){1,6})? >
+ |
+  <CDO: "<!--" >
+ |
+  <CDC: "-->" >
+ |
+  < SEMICOLON: ";" >
+ |
+  < LCURLY: "{" >
+ |
+  <RCURLY: "}" >
+ |
+  <LPAREN: "(" >
+ |
+  <RPAREN: ")" >
+ |
+  <LBRACKET: "[" >
+ |
+  <RBRACKET: "]" >
+ |
+  <FUNCTION: <ident>"(" >
+ |
+  <INCLUDES: "~=" >
+ |
+  <DASHMATCH: "|=" >
+
+
+  /*
+
+
+    #
+
+
+    #   DELIM           any other character not matched by the above rules, and neither a single
+    #                   nor a double quote
+  */
 }
 
 GRAMMARSTART
@@ -170,7 +207,16 @@ CompilationUnit:
 
 Any:
         <IDENT> |
-        <STRING> |
         <NUMBER> |
-        <HASH>
+        <PERCENTAGE> |
+        <DIMENSION> |
+        <STRING> | /*missing delim*/
+        <URI> |
+        <HASH> |
+        <UNICODE_RANGE> |
+        <INCLUDES> |
+        <DASHMATCH> |
+        <FUNCTION> (Any)* <RPAREN> |
+        <LPAREN> (Any)* <RPAREN> |
+        <LBRACKET> (Any)* <RBRACKET>
 ;

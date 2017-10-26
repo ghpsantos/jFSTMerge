@@ -29,10 +29,19 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	}
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
+		if (type.equals("Any13") && expectedType.equals("Any")) return true;
+		if (type.equals("Any12") && expectedType.equals("Any")) return true;
 		if (type.equals("Any4") && expectedType.equals("Any")) return true;
 		if (type.equals("Any3") && expectedType.equals("Any")) return true;
 		if (type.equals("Any2") && expectedType.equals("Any")) return true;
 		if (type.equals("Any1") && expectedType.equals("Any")) return true;
+		if (type.equals("Any8") && expectedType.equals("Any")) return true;
+		if (type.equals("Any7") && expectedType.equals("Any")) return true;
+		if (type.equals("Any6") && expectedType.equals("Any")) return true;
+		if (type.equals("Any5") && expectedType.equals("Any")) return true;
+		if (type.equals("Any11") && expectedType.equals("Any")) return true;
+		if (type.equals("Any10") && expectedType.equals("Any")) return true;
+		if (type.equals("Any9") && expectedType.equals("Any")) return true;
 		return false;
 	}
 }

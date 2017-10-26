@@ -126,14 +126,7 @@ TOKEN :
  |
   <#nl:  "\n" |"\r""\n" | "\r" |"\f">
 
-/*|
-  <#A: "a"|("\\0"){0,4}("41"|"61")("\r""\n"|[ "\t","\r","\n","\f"])?>
-|
-  <#C: "c"|("\\0"){0,4}("43"|"63")("\r""\n"|[ "\t","\r","\n","\f"])?>
-|
-  <comb: <A><C>>*/
 }
-
 
 /* TOKEN DEFINITION */
 
@@ -150,6 +143,50 @@ TOKEN :
   <HASH: "#"<name> >
  |
   <NUMBER: <num> >
+ |
+  <PERCENTAGE: <num>"%" >
+ |
+  <DIMENSION: <num><ident> >
+ |
+  <URI: "url("<string>")" |
+         "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
+ |
+  <UNICODE_RANGE:  "U+"((["0"-"9","A"-"F"])?){1,6}("-"(["0"-"9","A"-"F"]){1,6})? >
+ |
+  <CDO: "<!--" >
+ |
+  <CDC: "-->" >
+ |
+  < SEMICOLON: ";" >
+ |
+  < LCURLY: "{" >
+ |
+  <RCURLY: "}" >
+ |
+  <LPAREN: "(" >
+ |
+  <RPAREN: ")" >
+ |
+  <LBRACKET: "[" >
+ |
+  <RBRACKET: "]" >
+ |
+  <FUNCTION: <ident>"(" >
+ |
+  <INCLUDES: "~=" >
+ |
+  <DASHMATCH: "|=" >
+
+
+  /*
+
+
+    #
+
+
+    #   DELIM           any other character not matched by the above rules, and neither a single
+    #                   nor a double quote
+  */
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
@@ -161,11 +198,29 @@ FSTInfo Any(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	<IDENT> {return productionEndTerminal("Any1","-","-","Replacement","Default",first,token);}
  |
-	<STRING> {return productionEndTerminal("Any2","-","-","Replacement","Default",first,token);}
+	<NUMBER> {return productionEndTerminal("Any2","-","-","Replacement","Default",first,token);}
  |
-	<NUMBER> {return productionEndTerminal("Any3","-","-","Replacement","Default",first,token);}
+	<PERCENTAGE> {return productionEndTerminal("Any3","-","-","Replacement","Default",first,token);}
  |
-	<HASH> {return productionEndTerminal("Any4","-","-","Replacement","Default",first,token);}
+	<DIMENSION> {return productionEndTerminal("Any4","-","-","Replacement","Default",first,token);}
+ |
+	<STRING> {return productionEndTerminal("Any5","-","-","Replacement","Default",first,token);}
+ |
+	<URI> {return productionEndTerminal("Any6","-","-","Replacement","Default",first,token);}
+ |
+	<HASH> {return productionEndTerminal("Any7","-","-","Replacement","Default",first,token);}
+ |
+	<UNICODE_RANGE> {return productionEndTerminal("Any8","-","-","Replacement","Default",first,token);}
+ |
+	<INCLUDES> {return productionEndTerminal("Any9","-","-","Replacement","Default",first,token);}
+ |
+	<DASHMATCH> {return productionEndTerminal("Any10","-","-","Replacement","Default",first,token);}
+ |
+	<FUNCTION> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any11","-","-","Replacement","Default",first,token);}
+ |
+	<LPAREN> (n=Any(true){ replaceName(n);})* <RPAREN> {return productionEndTerminal("Any12","-","-","Replacement","Default",first,token);}
+ |
+	<LBRACKET> (n=Any(true){ replaceName(n);})* <RBRACKET> {return productionEndTerminal("Any13","-","-","Replacement","Default",first,token);}
 
  )  }
 

@@ -28,6 +28,22 @@ public interface CSSMergeParserConstants {
   int BADSTRING = 27;
   int HASH = 28;
   int NUMBER = 29;
+  int PERCENTAGE = 30;
+  int DIMENSION = 31;
+  int URI = 32;
+  int UNICODE_RANGE = 33;
+  int CDO = 34;
+  int CDC = 35;
+  int SEMICOLON = 36;
+  int LCURLY = 37;
+  int RCURLY = 38;
+  int LPAREN = 39;
+  int RPAREN = 40;
+  int LBRACKET = 41;
+  int RBRACKET = 42;
+  int FUNCTION = 43;
+  int INCLUDES = 44;
+  int DASHMATCH = 45;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -63,6 +79,22 @@ public interface CSSMergeParserConstants {
     "<BADSTRING>",
     "<HASH>",
     "<NUMBER>",
+    "<PERCENTAGE>",
+    "<DIMENSION>",
+    "<URI>",
+    "<UNICODE_RANGE>",
+    "\"<!--\"",
+    "\"-->\"",
+    "\";\"",
+    "\"{\"",
+    "\"}\"",
+    "\"(\"",
+    "\")\"",
+    "\"[\"",
+    "\"]\"",
+    "<FUNCTION>",
+    "\"~=\"",
+    "\"|=\"",
   };
 
 }
