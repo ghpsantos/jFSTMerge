@@ -277,7 +277,7 @@ GRAMMARSTART
 
 @FSTNonTerminal()
 CompilationUnit:
-        (hexcolor)*
+        (attrib)*
         <EOF>
 ;
 
@@ -296,7 +296,39 @@ operator:
 
 unary_operator:
     "-" | "+"
-  ;
+;
+
+property:
+    <IDENT>
+;
+
+attrib:
+     "[" <IDENT> (innerAttrib)? "]"
+;
+
+innerAttrib:
+    innerAttrib1 <IDENT> | <STRING>
+;
+
+innerAttrib1:
+     "=" | <INCLUDES> | <DASHMATCH>
+;
+
+pseudo:
+    ":" innerPseudo
+;
+
+innerPseudo:
+     <IDENT> | <FUNCTION> (<IDENT>)? ")"
+;
+
+declaration:
+    property ":" expr (prio)?
+;
+
+prio:
+    <IMPORTANT_SYM>
+;
 
 expr:
     term (innerExpr)*
@@ -326,6 +358,9 @@ hexcolor:
 
 
 /*
+----------------
+
+
 StyleSheet:
     <CDO> | <CDC> | ( LOOK_AHEAD(2) Statement)+
 ;

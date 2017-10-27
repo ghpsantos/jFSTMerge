@@ -56,7 +56,7 @@ private final int jjMoveStringLiteralDfa0_0()
       case 32:
          return jjStopAtPos(0, 1);
       case 41:
-         return jjStopAtPos(0, 71);
+         return jjStopAtPos(0, 75);
       case 43:
          return jjStopAtPos(0, 70);
       case 44:
@@ -67,8 +67,16 @@ private final int jjMoveStringLiteralDfa0_0()
       case 47:
          jjmatchedKind = 67;
          return jjMoveStringLiteralDfa1_0(0x40L);
+      case 58:
+         return jjStopAtPos(0, 74);
       case 60:
          return jjMoveStringLiteralDfa1_0(0x80000000000L);
+      case 61:
+         return jjStopAtPos(0, 73);
+      case 91:
+         return jjStopAtPos(0, 71);
+      case 93:
+         return jjStopAtPos(0, 72);
       case 124:
          return jjMoveStringLiteralDfa1_0(0x400000000000L);
       case 126:
@@ -6075,7 +6083,7 @@ null, null, null, null, null, null, null, null, null, null, null, null, null, nu
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
 null, null, "\74\41\55\55", "\55\55\76", "\176\75", "\174\75", null, null, null, 
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
-null, null, null, "\57", "\54", "\55", "\53", "\51", };
+null, null, null, "\57", "\54", "\55", "\53", "\133", "\135", "\75", "\72", "\51", };
 public static final String[] lexStateNames = {
    "DEFAULT", 
    "IN_MULTI_LINE_COMMENT", 
@@ -6083,10 +6091,11 @@ public static final String[] lexStateNames = {
 public static final int[] jjnewLexState = {
    -1, -1, -1, -1, -1, -1, 1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, 
 };
 static final long[] jjtoToken = {
-   0xfffff80000000001L, 0xffL, 
+   0xfffff80000000001L, 0xfffL, 
 };
 static final long[] jjtoSkip = {
    0xbeL, 0x0L, 
