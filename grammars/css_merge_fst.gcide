@@ -289,6 +289,43 @@ StyleSheet:
 ;
 
 
+importt:
+ <IMPORT_SYM>
+    inner_import (media_list)? ";"
+;
+
+inner_import:
+    <STRING>|<URI>
+;
+
+media:
+    <MEDIA_SYM> media_list "{" (ruleset)* "}"
+;
+
+media_list:
+    medium (inner_media_list)*
+;
+
+inner_media_list:
+    "," medium
+;
+
+medium:
+     <IDENT>
+;
+
+page:
+    <PAGE_SYM> (pseudo_page)?
+    "{" (declaration)? (inner_page)* "}"
+;
+
+inner_page:
+    ";" (declaration)?
+;
+
+pseudo_page:
+    ":" <IDENT>
+ ;
 
 operator:
  "/" | ","
@@ -306,13 +343,27 @@ property:
     <IDENT>
 ;
 
+ruleset:
+    selector (inner_ruleset1)*
+    "{" (declaration)? (inner_ruleset2)* "}"
+;
+
+inner_ruleset1:
+    "," selector
+;
+
+inner_ruleset2:
+    ";" (declaration)?
+;
+
 selector:
     simple_selector (inner_selector)?
 ;
 
+/* FALTA ESPECIFICAR A SEGUNDA PARTE DO INNER_SELECTOR  ? DO inner_selector2*/
 
 inner_selector:
-    inner_selector1 | (inner_selector2)?
+    LOOK_AHEAD(2) inner_selector1 | inner_selector2
 ;
 
 inner_selector1:
@@ -323,14 +374,14 @@ inner_selector2:
     (combinator)? selector
 ;
 
+
 simple_selector:
-    element_name (inner_simple_selector)* | (inner_simple_selector)+
+    element_name (LOOK_AHEAD(2) inner_simple_selector)* | (LOOK_AHEAD(2) inner_simple_selector)+
 ;
 
 inner_simple_selector:
     <HASH> | clazz | attrib | pseudo
 ;
-
 
 clazz:
     "." <IDENT>
