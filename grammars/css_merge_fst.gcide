@@ -178,44 +178,21 @@ baduri3         url\({w}{badstring}
 
 TOKEN :
 {
-  <IDENT: <ident> >
+  <CDO: "<!--" >
+ |
+  <CDC: "-->" >
+ |
+  <INCLUDES: "~=" >
+ |
+  <DASHMATCH: "|=" >
  |
   <STRING: <string> >
  |
   <BADSTRING: <badstring> >
  |
+  <IDENT: <ident> >
+ |
   <HASH: "#"<name> >
- |
-  <URI: "url("<string>")" |
-         "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
- |
-  <UNICODE_RANGE:  "U+"((["0"-"9","A"-"F"])?){1,6}("-"(["0"-"9","A"-"F"]){1,6})? >
- |
-  <CDO: "<!--" >
- |
-  <CDC: "-->" >
- |
-  <SEMICOLON: ";" >
- |
-  <COLON: ":" >
- |
-  < LCURLY: "{" >
- |
-  <RCURLY: "}" >
- |
-  <LPAREN: "(" >
- |
-  <RPAREN: ")" >
- |
-  <LBRACKET: "[" >
- |
-  <RBRACKET: "]" >
- |
-  <FUNCTION: <ident>"(" >
- |
-  <INCLUDES: "~=" >
- |
-  <DASHMATCH: "|=" >
  |
   <IMPORT_SYM: "@"<I><M><P><O><R><T> >
  |
@@ -233,45 +210,59 @@ TOKEN :
  |
   <LENGTH:
         <num><P><X> |
-        <num><C><M>
+        <num><C><M> |
+        <num><P><X> |
+        <num><M><M>	|
+        <num><C><M>	|
+        <num><I><N> |
+        <num><P><T> |
+        <num><P><C>
+
   >
+ |
+  <ANGLE:
+         <num><D><E><G> |
+         <num><R><A><D> |
+         <num><G><R><A><D>
+  >
+ |
+  <TIME:
+         <num><M><S> |
+         <num><S>
+  >
+ |
+  <FREQ:
+         <num><H><Z> |
+         <num><K><H><Z>
+  >
+ |
+  <DIMENSION: <num><ident> >
+ |
+  <PERCENTAGE: <num>"%" >
+ |
+   <NUMBER: <num> >
+ |
+   <URI: "url("<string>")" |
+          "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
+ |
+    <FUNCTION: <ident>"(" >
+ /*
+  < LCURLY: "{" >
+ |
+   <RCURLY: "}" >
+ |
+   <LPAREN: "(" >
+ |
+   <RPAREN: ")" >
+ |
+   <LBRACKET: "[" >
+ |
+   <RBRACKET: "]" >
+ |
+   <SEMICOLON: ";" >
+ |
+   <COLON: ":" >*/
 
-  |
-    <DIMENSION: <num><ident> >
-  |
-    <PERCENTAGE: <num>"%" >
-  |
-    <NUMBER: <num> >
-
-/*
-
-
-
-  {num}{P}{X}		{return LENGTH;}
-  {num}{C}{M}		{return LENGTH;}
-  {num}{M}{M}		{return LENGTH;}
-  {num}{I}{N}		{return LENGTH;}
-  {num}{P}{T}		{return LENGTH;}
-  {num}{P}{C}		{return LENGTH;}
-  {num}{D}{E}{G}		{return ANGLE;}
-  {num}{R}{A}{D}		{return ANGLE;}
-  {num}{G}{R}{A}{D}	{return ANGLE;}
-  {num}{M}{S}		{return TIME;}
-  {num}{S}		{return TIME;}
-  {num}{H}{Z}		{return FREQ;}
-  {num}{K}{H}{Z}		{return FREQ;}
-  {num}{ident}		{return DIMENSION;}
-
-  {num}%			{return PERCENTAGE;}
-  {num}			{return NUMBER;}
-
-  "url("{w}{string}{w}")" {return URI;}
-  "url("{w}{url}{w}")"    {return URI;}
-  {baduri}                {return BAD_URI;}
-
-  {ident}"("		{return FUNCTION;}
-
-  .			{return *yytext;}*/
 }
 
 GRAMMARSTART
@@ -293,7 +284,7 @@ CompilationUnit:
 StyleSheet:
    <EMS>
    <EXS>
-
+   <LENGTH>
 
 ;
 

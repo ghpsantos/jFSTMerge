@@ -36,7 +36,8 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(EMS);
     jj_consume_token(EXS);
-                     {if (true) return productionEndTerminal("StyleSheet","-","-","Replacement","Default",first,token);}
+    jj_consume_token(LENGTH);
+                              {if (true) return productionEndTerminal("StyleSheet","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -57,10 +58,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1_0 = new int[] {0x0,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x0,};
+      jj_la1_1 = new int[] {0x1000000,};
    }
    private static void jj_la1_2() {
-      jj_la1_2 = new int[] {0x8,};
+      jj_la1_2 = new int[] {0x0,};
    }
 
   public CSSMergeParser(CharStream stream) {
@@ -139,8 +140,8 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   public ParseException generateParseException() {
     jj_expentries.removeAllElements();
-    boolean[] la1tokens = new boolean[73];
-    for (int i = 0; i < 73; i++) {
+    boolean[] la1tokens = new boolean[67];
+    for (int i = 0; i < 67; i++) {
       la1tokens[i] = false;
     }
     if (jj_kind >= 0) {
@@ -162,7 +163,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         }
       }
     }
-    for (int i = 0; i < 73; i++) {
+    for (int i = 0; i < 67; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

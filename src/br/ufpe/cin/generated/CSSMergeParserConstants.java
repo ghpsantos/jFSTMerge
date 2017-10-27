@@ -41,36 +41,30 @@ public interface CSSMergeParserConstants {
   int U = 40;
   int X = 41;
   int Z = 42;
-  int IDENT = 43;
-  int STRING = 44;
-  int BADSTRING = 45;
-  int HASH = 46;
-  int URI = 47;
-  int UNICODE_RANGE = 48;
-  int CDO = 49;
-  int CDC = 50;
-  int SEMICOLON = 51;
-  int COLON = 52;
-  int LCURLY = 53;
-  int RCURLY = 54;
-  int LPAREN = 55;
-  int RPAREN = 56;
-  int LBRACKET = 57;
-  int RBRACKET = 58;
-  int FUNCTION = 59;
-  int INCLUDES = 60;
-  int DASHMATCH = 61;
-  int IMPORT_SYM = 62;
-  int PAGE_SYM = 63;
-  int MEDIA_SYM = 64;
-  int CHARSET_SYM = 65;
-  int IMPORTANT_SYM = 66;
-  int EMS = 67;
-  int EXS = 68;
-  int LENGTH = 69;
-  int DIMENSION = 70;
-  int PERCENTAGE = 71;
-  int NUMBER = 72;
+  int CDO = 43;
+  int CDC = 44;
+  int INCLUDES = 45;
+  int DASHMATCH = 46;
+  int STRING = 47;
+  int BADSTRING = 48;
+  int IDENT = 49;
+  int HASH = 50;
+  int IMPORT_SYM = 51;
+  int PAGE_SYM = 52;
+  int MEDIA_SYM = 53;
+  int CHARSET_SYM = 54;
+  int IMPORTANT_SYM = 55;
+  int EMS = 56;
+  int EXS = 57;
+  int LENGTH = 58;
+  int ANGLE = 59;
+  int TIME = 60;
+  int FREQ = 61;
+  int DIMENSION = 62;
+  int PERCENTAGE = 63;
+  int NUMBER = 64;
+  int URI = 65;
+  int FUNCTION = 66;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -119,25 +113,14 @@ public interface CSSMergeParserConstants {
     "<U>",
     "<X>",
     "<Z>",
-    "<IDENT>",
-    "<STRING>",
-    "<BADSTRING>",
-    "<HASH>",
-    "<URI>",
-    "<UNICODE_RANGE>",
     "\"<!--\"",
     "\"-->\"",
-    "\";\"",
-    "\":\"",
-    "\"{\"",
-    "\"}\"",
-    "\"(\"",
-    "\")\"",
-    "\"[\"",
-    "\"]\"",
-    "<FUNCTION>",
     "\"~=\"",
     "\"|=\"",
+    "<STRING>",
+    "<BADSTRING>",
+    "<IDENT>",
+    "<HASH>",
     "<IMPORT_SYM>",
     "<PAGE_SYM>",
     "<MEDIA_SYM>",
@@ -146,9 +129,14 @@ public interface CSSMergeParserConstants {
     "<EMS>",
     "<EXS>",
     "<LENGTH>",
+    "<ANGLE>",
+    "<TIME>",
+    "<FREQ>",
     "<DIMENSION>",
     "<PERCENTAGE>",
     "<NUMBER>",
+    "<URI>",
+    "<FUNCTION>",
   };
 
 }
