@@ -294,12 +294,50 @@ operator:
  "/" | ","
 ;
 
+combinator:
+    "+" |  ">"
+;
+
 unary_operator:
     "-" | "+"
 ;
 
 property:
     <IDENT>
+;
+
+selector:
+    simple_selector (inner_selector)?
+;
+
+
+inner_selector:
+    inner_selector1 | (inner_selector2)?
+;
+
+inner_selector1:
+    combinator selector
+;
+
+inner_selector2:
+    (combinator)? selector
+;
+
+simple_selector:
+    element_name (inner_simple_selector)* | (inner_simple_selector)+
+;
+
+inner_simple_selector:
+    <HASH> | clazz | attrib | pseudo
+;
+
+
+clazz:
+    "." <IDENT>
+;
+
+element_name:
+    <IDENT> | "*"
 ;
 
 attrib:
