@@ -22,30 +22,55 @@ public interface CSSMergeParserConstants {
   int badstring1 = 21;
   int badstring2 = 22;
   int nl = 23;
-  int IDENT = 24;
-  int ATKEYWORD = 25;
-  int STRING = 26;
-  int BADSTRING = 27;
-  int HASH = 28;
-  int NUMBER = 29;
-  int PERCENTAGE = 30;
-  int DIMENSION = 31;
-  int URI = 32;
-  int UNICODE_RANGE = 33;
-  int CDO = 34;
-  int CDC = 35;
-  int SEMICOLON = 36;
-  int COLON = 37;
-  int LCURLY = 38;
-  int RCURLY = 39;
-  int LPAREN = 40;
-  int RPAREN = 41;
-  int LBRACKET = 42;
-  int RBRACKET = 43;
-  int FUNCTION = 44;
-  int INCLUDES = 45;
-  int DASHMATCH = 46;
-  int DELIM = 47;
+  int A = 24;
+  int C = 25;
+  int D = 26;
+  int E = 27;
+  int G = 28;
+  int H = 29;
+  int I = 30;
+  int K = 31;
+  int L = 32;
+  int M = 33;
+  int N = 34;
+  int O = 35;
+  int P = 36;
+  int R = 37;
+  int S = 38;
+  int T = 39;
+  int U = 40;
+  int X = 41;
+  int Z = 42;
+  int IDENT = 43;
+  int STRING = 44;
+  int BADSTRING = 45;
+  int HASH = 46;
+  int URI = 47;
+  int UNICODE_RANGE = 48;
+  int CDO = 49;
+  int CDC = 50;
+  int SEMICOLON = 51;
+  int COLON = 52;
+  int LCURLY = 53;
+  int RCURLY = 54;
+  int LPAREN = 55;
+  int RPAREN = 56;
+  int LBRACKET = 57;
+  int RBRACKET = 58;
+  int FUNCTION = 59;
+  int INCLUDES = 60;
+  int DASHMATCH = 61;
+  int IMPORT_SYM = 62;
+  int PAGE_SYM = 63;
+  int MEDIA_SYM = 64;
+  int CHARSET_SYM = 65;
+  int IMPORTANT_SYM = 66;
+  int EMS = 67;
+  int EXS = 68;
+  int LENGTH = 69;
+  int DIMENSION = 70;
+  int PERCENTAGE = 71;
+  int NUMBER = 72;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -75,14 +100,29 @@ public interface CSSMergeParserConstants {
     "<badstring1>",
     "<badstring2>",
     "<nl>",
+    "<A>",
+    "<C>",
+    "<D>",
+    "<E>",
+    "<G>",
+    "<H>",
+    "<I>",
+    "<K>",
+    "<L>",
+    "<M>",
+    "<N>",
+    "<O>",
+    "<P>",
+    "<R>",
+    "<S>",
+    "<T>",
+    "<U>",
+    "<X>",
+    "<Z>",
     "<IDENT>",
-    "<ATKEYWORD>",
     "<STRING>",
     "<BADSTRING>",
     "<HASH>",
-    "<NUMBER>",
-    "<PERCENTAGE>",
-    "<DIMENSION>",
     "<URI>",
     "<UNICODE_RANGE>",
     "\"<!--\"",
@@ -98,7 +138,17 @@ public interface CSSMergeParserConstants {
     "<FUNCTION>",
     "\"~=\"",
     "\"|=\"",
-    "<DELIM>",
+    "<IMPORT_SYM>",
+    "<PAGE_SYM>",
+    "<MEDIA_SYM>",
+    "<CHARSET_SYM>",
+    "<IMPORTANT_SYM>",
+    "<EMS>",
+    "<EXS>",
+    "<LENGTH>",
+    "<DIMENSION>",
+    "<PERCENTAGE>",
+    "<NUMBER>",
   };
 
 }
