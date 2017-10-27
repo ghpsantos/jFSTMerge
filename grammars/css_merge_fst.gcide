@@ -277,20 +277,51 @@ GRAMMARSTART
 
 @FSTNonTerminal()
 CompilationUnit:
-        (StyleSheet)*
+        (hexcolor)*
         <EOF>
 ;
 
 StyleSheet:
-   <EMS>
-   <EXS>
-   <LENGTH>
+    <EMS>
+    <EXS>
+    <LENGTH>
 
 ;
 
 
 
+operator:
+ "/" | ","
+;
 
+unary_operator:
+    "-" | "+"
+  ;
+
+expr:
+    term (innerExpr)*
+;
+
+innerExpr:
+    (operator)? term
+;
+
+term: (unary_operator)?
+    innerTermNumerals | <STRING> | <IDENT> | <URI> | hexcolor | function
+;
+
+innerTermNumerals:
+    <NUMBER> | <PERCENTAGE> | <LENGTH> | <EMS> | <EXS> | <ANGLE> |
+    <TIME> | <FREQ>
+;
+
+function:
+    <FUNCTION> expr ")"
+;
+
+hexcolor:
+    <HASH>
+;
 
 
 

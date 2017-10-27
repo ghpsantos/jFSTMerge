@@ -137,6 +137,11 @@ public interface CSSMergeParserConstants {
     "<NUMBER>",
     "<URI>",
     "<FUNCTION>",
+    "\"/\"",
+    "\",\"",
+    "\"-\"",
+    "\"+\"",
+    "\")\"",
   };
 
 }

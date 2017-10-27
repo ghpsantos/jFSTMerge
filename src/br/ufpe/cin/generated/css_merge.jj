@@ -266,13 +266,89 @@ TOKEN :
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	(n=StyleSheet(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
+	(n=hexcolor(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
 
  )  }
 
 FSTInfo StyleSheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	<EMS> <EXS> <LENGTH> {return productionEndTerminal("StyleSheet","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo operator(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"/"  {return productionEndTerminal("operator1","-","-","Replacement","Default",first,token);}
+ |
+	","  {return productionEndTerminal("operator2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo unary_operator(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"-"  {return productionEndTerminal("unary_operator1","-","-","Replacement","Default",first,token);}
+ |
+	"+"  {return productionEndTerminal("unary_operator2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo expr(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=term(true){ replaceName(n);} (n=innerExpr(true){ replaceName(n);})* {return productionEndTerminal("expr","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo innerExpr(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	[n=operator(true){ replaceName(n);}] n=term(true){ replaceName(n);} {return productionEndTerminal("innerExpr","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo term(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	[n=unary_operator(true){ replaceName(n);}] n=innerTermNumerals(true){ replaceName(n);} {return productionEndTerminal("term1","-","-","Replacement","Default",first,token);}
+ |
+	<STRING> {return productionEndTerminal("term2","-","-","Replacement","Default",first,token);}
+ |
+	<IDENT> {return productionEndTerminal("term3","-","-","Replacement","Default",first,token);}
+ |
+	<URI> {return productionEndTerminal("term4","-","-","Replacement","Default",first,token);}
+ |
+	n=hexcolor(true){ replaceName(n);} {return productionEndTerminal("term5","-","-","Replacement","Default",first,token);}
+ |
+	n=function(true){ replaceName(n);} {return productionEndTerminal("term6","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo innerTermNumerals(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<NUMBER> {return productionEndTerminal("innerTermNumerals1","-","-","Replacement","Default",first,token);}
+ |
+	<PERCENTAGE> {return productionEndTerminal("innerTermNumerals2","-","-","Replacement","Default",first,token);}
+ |
+	<LENGTH> {return productionEndTerminal("innerTermNumerals3","-","-","Replacement","Default",first,token);}
+ |
+	<EMS> {return productionEndTerminal("innerTermNumerals4","-","-","Replacement","Default",first,token);}
+ |
+	<EXS> {return productionEndTerminal("innerTermNumerals5","-","-","Replacement","Default",first,token);}
+ |
+	<ANGLE> {return productionEndTerminal("innerTermNumerals6","-","-","Replacement","Default",first,token);}
+ |
+	<TIME> {return productionEndTerminal("innerTermNumerals7","-","-","Replacement","Default",first,token);}
+ |
+	<FREQ> {return productionEndTerminal("innerTermNumerals8","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo function(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<FUNCTION> n=expr(true){ replaceName(n);} ")" {return productionEndTerminal("function","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo hexcolor(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<HASH> {return productionEndTerminal("hexcolor","-","-","Replacement","Default",first,token);}
 
  )  }
 

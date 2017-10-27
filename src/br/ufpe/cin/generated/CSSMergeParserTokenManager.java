@@ -11,21 +11,21 @@ public class CSSMergeParserTokenManager implements CSSMergeParserConstants
 {
   public  java.io.PrintStream debugStream = System.out;
   public  void setDebugStream(java.io.PrintStream ds) { debugStream = ds; }
-private final int jjStopStringLiteralDfa_0(int pos, long active0)
+private final int jjStopStringLiteralDfa_0(int pos, long active0, long active1)
 {
    switch (pos)
    {
       case 0:
-         if ((active0 & 0x100000000000L) != 0L)
+         if ((active0 & 0x100000000000L) != 0L || (active1 & 0x20L) != 0L)
             return 260;
          return -1;
       default :
          return -1;
    }
 }
-private final int jjStartNfa_0(int pos, long active0)
+private final int jjStartNfa_0(int pos, long active0, long active1)
 {
-   return jjMoveNfa_0(jjStopStringLiteralDfa_0(pos, active0), pos + 1);
+   return jjMoveNfa_0(jjStopStringLiteralDfa_0(pos, active0, active1), pos + 1);
 }
 private final int jjStopAtPos(int pos, int kind)
 {
@@ -55,9 +55,17 @@ private final int jjMoveStringLiteralDfa0_0()
          return jjStopAtPos(0, 4);
       case 32:
          return jjStopAtPos(0, 1);
+      case 41:
+         return jjStopAtPos(0, 71);
+      case 43:
+         return jjStopAtPos(0, 70);
+      case 44:
+         return jjStopAtPos(0, 68);
       case 45:
+         jjmatchedKind = 69;
          return jjMoveStringLiteralDfa1_0(0x100000000000L);
       case 47:
+         jjmatchedKind = 67;
          return jjMoveStringLiteralDfa1_0(0x40L);
       case 60:
          return jjMoveStringLiteralDfa1_0(0x80000000000L);
@@ -73,7 +81,7 @@ private final int jjMoveStringLiteralDfa1_0(long active0)
 {
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
-      jjStopStringLiteralDfa_0(0, active0);
+      jjStopStringLiteralDfa_0(0, active0, 0L);
       return 1;
    }
    switch(curChar)
@@ -95,15 +103,15 @@ private final int jjMoveStringLiteralDfa1_0(long active0)
       default :
          break;
    }
-   return jjStartNfa_0(0, active0);
+   return jjStartNfa_0(0, active0, 0L);
 }
 private final int jjMoveStringLiteralDfa2_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(0, old0); 
+      return jjStartNfa_0(0, old0, 0L);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
-      jjStopStringLiteralDfa_0(1, active0);
+      jjStopStringLiteralDfa_0(1, active0, 0L);
       return 2;
    }
    switch(curChar)
@@ -117,15 +125,15 @@ private final int jjMoveStringLiteralDfa2_0(long old0, long active0)
       default :
          break;
    }
-   return jjStartNfa_0(1, active0);
+   return jjStartNfa_0(1, active0, 0L);
 }
 private final int jjMoveStringLiteralDfa3_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(1, old0); 
+      return jjStartNfa_0(1, old0, 0L);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
-      jjStopStringLiteralDfa_0(2, active0);
+      jjStopStringLiteralDfa_0(2, active0, 0L);
       return 3;
    }
    switch(curChar)
@@ -137,7 +145,7 @@ private final int jjMoveStringLiteralDfa3_0(long old0, long active0)
       default :
          break;
    }
-   return jjStartNfa_0(2, active0);
+   return jjStartNfa_0(2, active0, 0L);
 }
 private final void jjCheckNAdd(int state)
 {
@@ -6067,7 +6075,7 @@ null, null, null, null, null, null, null, null, null, null, null, null, null, nu
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
 null, null, "\74\41\55\55", "\55\55\76", "\176\75", "\174\75", null, null, null, 
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
-null, null, null, };
+null, null, null, "\57", "\54", "\55", "\53", "\51", };
 public static final String[] lexStateNames = {
    "DEFAULT", 
    "IN_MULTI_LINE_COMMENT", 
@@ -6075,10 +6083,10 @@ public static final String[] lexStateNames = {
 public static final int[] jjnewLexState = {
    -1, -1, -1, -1, -1, -1, 1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
 };
 static final long[] jjtoToken = {
-   0xfffff80000000001L, 0x7L, 
+   0xfffff80000000001L, 0xffL, 
 };
 static final long[] jjtoSkip = {
    0xbeL, 0x0L, 
