@@ -19,8 +19,11 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	public boolean visit(FSTNonTerminal nonTerminal) {
 		if (nonTerminal.getType().equals("CompilationUnit")) {
 			printFeatures(nonTerminal,true);
-			for (FSTNode v : getChildren(nonTerminal,"attrib")) {
-				v.accept(this);
+			{
+				FSTNode v=getChild(nonTerminal, "stylesheet");
+				if (v!=null) {
+					v.accept(this);
+				}
 			}
 			printFeatures(nonTerminal,false);
 			return false;
@@ -32,6 +35,8 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("inner_selector2") && expectedType.equals("inner_selector")) return true;
 		if (type.equals("innerAttrib11") && expectedType.equals("innerAttrib1")) return true;
 		if (type.equals("innerPseudo2") && expectedType.equals("innerPseudo")) return true;
+		if (type.equals("stylesheet22") && expectedType.equals("stylesheet2")) return true;
+		if (type.equals("stylesheet42") && expectedType.equals("stylesheet4")) return true;
 		if (type.equals("inner_import1") && expectedType.equals("inner_import")) return true;
 		if (type.equals("innerAttrib1") && expectedType.equals("innerAttrib")) return true;
 		if (type.equals("innerAttrib13") && expectedType.equals("innerAttrib1")) return true;
@@ -50,6 +55,9 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("unary_operator1") && expectedType.equals("unary_operator")) return true;
 		if (type.equals("inner_selector1") && expectedType.equals("inner_selector")) return true;
 		if (type.equals("innerPseudo1") && expectedType.equals("innerPseudo")) return true;
+		if (type.equals("stylesheet21") && expectedType.equals("stylesheet2")) return true;
+		if (type.equals("stylesheet43") && expectedType.equals("stylesheet4")) return true;
+		if (type.equals("stylesheet41") && expectedType.equals("stylesheet4")) return true;
 		if (type.equals("inner_import2") && expectedType.equals("inner_import")) return true;
 		if (type.equals("innerAttrib2") && expectedType.equals("innerAttrib")) return true;
 		if (type.equals("innerAttrib12") && expectedType.equals("innerAttrib1")) return true;

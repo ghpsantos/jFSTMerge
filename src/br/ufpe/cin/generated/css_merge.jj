@@ -266,13 +266,49 @@ TOKEN :
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	(n=attrib(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
+	n=stylesheet(inTerminal){ replaceName(n);} <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
 
  )  }
 
-FSTInfo StyleSheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+FSTInfo stylesheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<EMS> <EXS> <LENGTH> {return productionEndTerminal("StyleSheet","-","-","Replacement","Default",first,token);}
+	[n=stylesheet1(true){ replaceName(n);}] (n=stylesheet2(true){ replaceName(n);})* (n=stylesheet3(true){ replaceName(n);})* (n=stylesheet4(true){ replaceName(n);})* {return productionEndTerminal("stylesheet","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo stylesheet1(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<CHARSET_SYM> <STRING> ";" {return productionEndTerminal("stylesheet1","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo stylesheet2(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<CDO> {return productionEndTerminal("stylesheet21","-","-","Replacement","Default",first,token);}
+ |
+	<CDC> {return productionEndTerminal("stylesheet22","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo stylesheet3(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=importt(true){ replaceName(n);} (LOOKAHEAD(2) n=stylesheet2(true){ replaceName(n);})* {return productionEndTerminal("stylesheet3","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo stylesheet4(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=ruleset(true){ replaceName(n);} {return productionEndTerminal("stylesheet41","-","-","Replacement","Default",first,token);}
+ |
+	n=media(true){ replaceName(n);} {return productionEndTerminal("stylesheet42","-","-","Replacement","Default",first,token);}
+ |
+	n=page(true){ replaceName(n);} {return productionEndTerminal("stylesheet43","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo stylesheet5(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=stylesheet3(true){ replaceName(n);} (n=stylesheet2(true){ replaceName(n);})* {return productionEndTerminal("stylesheet5","-","-","Replacement","Default",first,token);}
 
  )  }
 

@@ -277,17 +277,33 @@ GRAMMARSTART
 
 @FSTNonTerminal()
 CompilationUnit:
-        (attrib)*
+        stylesheet
         <EOF>
 ;
 
-StyleSheet:
-    <EMS>
-    <EXS>
-    <LENGTH>
-
+stylesheet:
+ (stylesheet1)? (stylesheet2)* (stylesheet3)* (stylesheet4)*
 ;
 
+stylesheet1:
+    <CHARSET_SYM> <STRING> ";"
+;
+
+stylesheet2:
+    <CDO>|<CDC>
+;
+
+stylesheet3:
+  importt (LOOK_AHEAD(2) stylesheet2)*
+;
+
+stylesheet4:
+     ruleset | media | page
+;
+
+stylesheet5:
+    stylesheet3(stylesheet2)*
+;
 
 importt:
  <IMPORT_SYM>
@@ -443,85 +459,3 @@ function:
 hexcolor:
     <HASH>
 ;
-
-
-
-/*
-----------------
-
-
-StyleSheet:
-    <CDO> | <CDC> | ( LOOK_AHEAD(2) Statement)+
-;
-
-Statement:
-    RuleSet|
-    AtRule
-;
-
-AtRule:
-     <ATKEYWORD>  ( LOOK_AHEAD(2) Any)* [LOOK_AHEAD(2) InnerAtRule]
-;
-
-InnerAtRule:
-    Block |
-    <SEMICOLON>
-;
-
-Block:
-    <LCURLY> (InnerBlockDeclaration)* <RCURLY>
-;
-
-InnerBlockDeclaration:
-    Any |
-    Block |
-    <ATKEYWORD> |
-    <SEMICOLON>
-;
-
-RuleSet:
-    (Selector)? <LCURLY> (Declaration)? (InnerRuleSet)* <RCURLY>
-;
-
-InnerRuleSet:
-    <SEMICOLON> (Declaration)?
-;
-
-Selector:
-    (Any)+
- ;
-
-Declaration:
-    (<DELIM>)? Property <COLON> Value
-;
-
-Property:
-    <IDENT>
-;
-
-Value:
-    (InnerValueDeclaration)+
-;
-
-InnerValueDeclaration:
-    Any |
-    Block |
-    <ATKEYWORD>
-;
-
-Any:
-    <IDENT> |
-    <NUMBER> |
-    <PERCENTAGE> |
-    <DIMENSION> |
-    <STRING> |
-    <DELIM> |
-    <URI> |
-    <HASH> |
-    <UNICODE_RANGE> |
-    <INCLUDES> |
-    <DASHMATCH> |
-    <FUNCTION> (Any)* <RPAREN> |
-    <LPAREN> (Any)* <RPAREN> |
-    <LBRACKET> (Any)* <RBRACKET>
-;*/
