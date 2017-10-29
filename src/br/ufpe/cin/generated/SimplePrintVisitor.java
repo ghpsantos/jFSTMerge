@@ -20,10 +20,44 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (nonTerminal.getType().equals("CompilationUnit")) {
 			printFeatures(nonTerminal,true);
 			{
-				FSTNode v=getChild(nonTerminal, "stylesheet");
+				FSTNode v=getChild(nonTerminal, "stylesheet1");
 				if (v!=null) {
 					v.accept(this);
 				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"stylesheet2")) {
+				v.accept(this);
+			}
+			for (FSTNode v : getChildren(nonTerminal,"stylesheet3")) {
+				v.accept(this);
+			}
+			for (FSTNode v : getChildren(nonTerminal,"stylesheet5")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("stylesheet41")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "ruleset");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("stylesheet5")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "stylesheet4");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"stylesheet2")) {
+				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
 			return false;

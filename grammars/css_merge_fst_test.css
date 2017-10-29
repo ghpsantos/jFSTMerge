@@ -11,7 +11,9 @@ td, th {
     border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
+tr:hover,
+td,
+tr {
     background-color: #cce6ff;
 }
 

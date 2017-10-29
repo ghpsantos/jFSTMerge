@@ -266,13 +266,7 @@ TOKEN :
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=stylesheet(inTerminal){ replaceName(n);} <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
-
- )  }
-
-FSTInfo stylesheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	[n=stylesheet1(true){ replaceName(n);}] (n=stylesheet2(true){ replaceName(n);})* (n=stylesheet3(true){ replaceName(n);})* (n=stylesheet5(true){ replaceName(n);})* {return productionEndTerminal("stylesheet","-","-","Replacement","Default",first,token);}
+	[n=stylesheet1(inTerminal){ replaceName(n);}] (n=stylesheet2(inTerminal){ replaceName(n);})* (n=stylesheet3(inTerminal){ replaceName(n);})* (n=stylesheet5(inTerminal){ replaceName(n);})* <EOF> {return productionEndNonTerminal("CompilationUnit","-","-");}
 
  )  }
 
@@ -298,7 +292,7 @@ FSTInfo stylesheet3(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo stylesheet4(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=ruleset(true){ replaceName(n);} {return productionEndTerminal("stylesheet41","-","-","Replacement","Default",first,token);}
+	n=ruleset(inTerminal){ replaceName("ruleset", n);}{ replaceName(n);} {return productionEndNonTerminal("stylesheet41","{ruleset}","{ruleset}");}
  |
 	n=media(true){ replaceName(n);} {return productionEndTerminal("stylesheet42","-","-","Replacement","Default",first,token);}
  |
@@ -308,7 +302,7 @@ FSTInfo stylesheet4(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo stylesheet5(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=stylesheet4(true){ replaceName(n);} (n=stylesheet2(true){ replaceName(n);})* {return productionEndTerminal("stylesheet5","-","-","Replacement","Default",first,token);}
+	n=stylesheet4(inTerminal){ replaceName("stylesheet4", n);}{ replaceName(n);} (n=stylesheet2(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("stylesheet5","{stylesheet4}","{stylesheet4}");}
 
  )  }
 
@@ -400,13 +394,7 @@ FSTInfo property(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo ruleset(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=selector(true){ replaceName(n);} (n=inner_ruleset1(true){ replaceName(n);})* "{" [n=declaration(true){ replaceName(n);}] (n=inner_ruleset2(true){ replaceName(n);})* "}" {return productionEndTerminal("ruleset","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo inner_ruleset1(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	"," n=selector(true){ replaceName(n);} {return productionEndTerminal("inner_ruleset1","-","-","Replacement","Default",first,token);}
+	n=selector(true){ replaceName("selector", n);}{ replaceName(n);} ("," n=selector(true){ replaceName("selector", n);}{ replaceName(n);})* "{" [n=declaration(true){ replaceName(n);}] (n=inner_ruleset2(true){ replaceName(n);})* "}" {return productionEndTerminal("ruleset","-","{selector}^-","Replacement","Default",first,token);}
 
  )  }
 
@@ -418,7 +406,7 @@ FSTInfo inner_ruleset2(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo selector(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=simple_selector(true){ replaceName(n);} [n=inner_selector(true){ replaceName(n);}] {return productionEndTerminal("selector","-","-","Replacement","Default",first,token);}
+	n=simple_selector(true){ replaceName(n);} [n=inner_selector(true){ replaceName(n);}] {return productionEndTerminal("selector","-","{TOSTRING}","Replacement","Default",first,token);}
 
  )  }
 

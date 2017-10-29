@@ -277,12 +277,8 @@ GRAMMARSTART
 
 @FSTNonTerminal()
 CompilationUnit:
-        stylesheet
+        (stylesheet1)? (stylesheet2)* (stylesheet3)* (stylesheet5)*
         <EOF>
-;
-
-stylesheet:
- (stylesheet1)? (stylesheet2)* (stylesheet3)* (stylesheet5)*
 ;
 
 stylesheet1:
@@ -298,13 +294,13 @@ stylesheet3:
 ;
 
 stylesheet4:
-    /* @FSTNonTerminal(name="{ruleset}") */
+    @FSTNonTerminal(name="{ruleset}")
      ruleset |
      media |
      page
 ;
 
-/*@FSTNonTerminal(name="{stylesheet5}")*/
+@FSTNonTerminal(name="{stylesheet4}")
 stylesheet5:
     stylesheet4(stylesheet2)*
 ;
@@ -363,25 +359,20 @@ property:
     <IDENT>
 ;
 
-/*@FSTExportName("{selector}({(inner_ruleset1)*})")*/
+@FSTExportName("{selector}^-")
 ruleset:
-    selector (inner_ruleset1)*
+    &LI selector  ("," &LI selector)*
     "{" (declaration)? (inner_ruleset2)* "}"
-;
-
-inner_ruleset1:
-    "," selector
 ;
 
 inner_ruleset2:
     ";" (declaration)?
 ;
 
+@FSTExportName("{TOSTRING}")
 selector:
     simple_selector (inner_selector)?
 ;
-
-/* FALTA ESPECIFICAR A SEGUNDA PARTE DO INNER_SELECTOR  ? DO inner_selector2*/
 
 inner_selector:
     LOOK_AHEAD(2) inner_selector1 | inner_selector2
