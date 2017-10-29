@@ -272,7 +272,7 @@ FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo stylesheet(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	[n=stylesheet1(true){ replaceName(n);}] (n=stylesheet2(true){ replaceName(n);})* (n=stylesheet3(true){ replaceName(n);})* (n=stylesheet4(true){ replaceName(n);})* {return productionEndTerminal("stylesheet","-","-","Replacement","Default",first,token);}
+	[n=stylesheet1(true){ replaceName(n);}] (n=stylesheet2(true){ replaceName(n);})* (n=stylesheet3(true){ replaceName(n);})* (n=stylesheet5(true){ replaceName(n);})* {return productionEndTerminal("stylesheet","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -308,7 +308,7 @@ FSTInfo stylesheet4(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo stylesheet5(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=stylesheet3(true){ replaceName(n);} (n=stylesheet2(true){ replaceName(n);})* {return productionEndTerminal("stylesheet5","-","-","Replacement","Default",first,token);}
+	n=stylesheet4(true){ replaceName(n);} (n=stylesheet2(true){ replaceName(n);})* {return productionEndTerminal("stylesheet5","-","-","Replacement","Default",first,token);}
 
  )  }
 

@@ -76,7 +76,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         jj_la1[3] = jj_gen;
         break label_3;
       }
-      n = stylesheet4(true);
+      n = stylesheet5(true);
                                                                                                                                                         replaceName(n);
     }
                                                                                                                                                                             {if (true) return productionEndTerminal("stylesheet","-","-","Replacement","Default",first,token);}
@@ -167,7 +167,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo stylesheet5(boolean inTerminal) throws ParseException {
                                             Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    n = stylesheet3(true);
+    n = stylesheet4(true);
                              replaceName(n);
     label_5:
     while (true) {

@@ -282,7 +282,7 @@ CompilationUnit:
 ;
 
 stylesheet:
- (stylesheet1)? (stylesheet2)* (stylesheet3)* (stylesheet4)*
+ (stylesheet1)? (stylesheet2)* (stylesheet3)* (stylesheet5)*
 ;
 
 stylesheet1:
@@ -298,11 +298,15 @@ stylesheet3:
 ;
 
 stylesheet4:
-     ruleset | media | page
+    /* @FSTNonTerminal(name="{ruleset}") */
+     ruleset |
+     media |
+     page
 ;
 
+/*@FSTNonTerminal(name="{stylesheet5}")*/
 stylesheet5:
-    stylesheet3(stylesheet2)*
+    stylesheet4(stylesheet2)*
 ;
 
 importt:
@@ -359,6 +363,7 @@ property:
     <IDENT>
 ;
 
+/*@FSTExportName("{selector}({(inner_ruleset1)*})")*/
 ruleset:
     selector (inner_ruleset1)*
     "{" (declaration)? (inner_ruleset2)* "}"
@@ -389,7 +394,6 @@ inner_selector1:
 inner_selector2:
     (combinator)? selector
 ;
-
 
 simple_selector:
     element_name (LOOK_AHEAD(2) inner_simple_selector)* | (LOOK_AHEAD(2) inner_simple_selector)+
