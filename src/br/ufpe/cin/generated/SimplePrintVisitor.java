@@ -62,6 +62,36 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
+		if (nonTerminal.getType().equals("ruleset")) {
+			printFeatures(nonTerminal,true);
+			Iterator<FSTNode> listElements = getChildren(nonTerminal, "selector").iterator();
+			if (listElements.hasNext()) {
+				listElements.next().accept(this);
+			}
+			while (listElements.hasNext()) {
+				printToken(",");
+				listElements.next().accept(this);
+			}
+			printToken("{");
+			for (FSTNode v : getChildren(nonTerminal,"declarationList")) {
+				v.accept(this);
+			}
+			printToken("}");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("declarationList")) {
+			printFeatures(nonTerminal,true);
+			Iterator<FSTNode> listElements = getChildren(nonTerminal, "declaration").iterator();
+			if (listElements.hasNext()) {
+				listElements.next().accept(this);
+			}
+			while (listElements.hasNext()) {
+				listElements.next().accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
 		throw new RuntimeException("Unknown Non Terminal in FST "+nonTerminal);
 	}
 	protected boolean isSubtype(String type, String expectedType) {

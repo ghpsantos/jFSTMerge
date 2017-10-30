@@ -355,21 +355,23 @@ unary_operator:
     "-" | "+"
 ;
 
+@FSTExportName("{TOSTRING}")
 property:
     <IDENT>
 ;
 
-@FSTExportName("{selector}^-")
+@FSTNonTerminal(name="{selector}^-")
 ruleset:
     &LI selector  ("," &LI selector)*
-    "{" (declaration)? (inner_ruleset2)* "}"
+    "{" ( declarationList)* "}"
 ;
 
-inner_ruleset2:
-    ";" (declaration)?
+@FSTNonTerminal()
+declarationList:
+    &LI declaration(LOOK_AHEAD(2) &LI declaration)*
 ;
 
-@FSTExportName("{TOSTRING}")
+@FSTTerminal(name="{TOSTRING}")
 selector:
     simple_selector (inner_selector)?
 ;
@@ -422,8 +424,9 @@ innerPseudo:
      <IDENT> | <FUNCTION> (<IDENT>)? ")"
 ;
 
+@FSTTerminal(name="{property}")
 declaration:
-    property ":" expr (prio)?
+    property ":" expr (prio)? ";"
 ;
 
 prio:

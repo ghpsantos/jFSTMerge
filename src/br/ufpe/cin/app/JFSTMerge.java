@@ -213,9 +213,9 @@ public class JFSTMerge {
 //		System.exit(conflictState);
 
 				new JFSTMerge().mergeFiles(
-						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\left.java"),
-						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\base.java"),
-						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\right.java"),
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\left.css"),
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\base.css"),
+						new File("C:\\Users\\Guilherme\\Desktop\\aula11_09\\merge\\right.css"),
 						null);
 
 		/*		try {
