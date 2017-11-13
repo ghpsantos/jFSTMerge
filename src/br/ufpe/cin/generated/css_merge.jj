@@ -504,7 +504,7 @@ FSTInfo innerPseudo(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo declaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=property(true){ replaceName("property", n);}{ replaceName(n);} ":" n=expr(true){ replaceName(n);} [n=prio(true){ replaceName(n);}] ";" {return productionEndTerminal("declaration","{property}","{property}","Replacement","Default",first,token);}
+	n=property(true){ replaceName("property", n);}{ replaceName(n);} ":" n=expr(true){ replaceName(n);} [n=prio(true){ replaceName(n);}] ";" {return productionEndTerminal("declaration","{property}","{property}","Replacement","LineBased",first,token);}
 
  )  }
 

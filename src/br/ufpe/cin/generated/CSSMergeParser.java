@@ -801,7 +801,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       ;
     }
     jj_consume_token(67);
-                                                                                                                                                  {if (true) return productionEndTerminal("declaration","{property}","{property}","Replacement","Default",first,token);}
+                                                                                                                                                  {if (true) return productionEndTerminal("declaration","{property}","{property}","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
 

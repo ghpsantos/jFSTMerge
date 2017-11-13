@@ -363,7 +363,7 @@ property:
 @FSTNonTerminal(name="{selector}^-")
 ruleset:
     &LI selector  ("," &LI selector)*
-    "{" ( declarationList)* "}"
+    "{" ( declarationList)* @+! "}"
 ;
 
 @FSTNonTerminal()
@@ -424,7 +424,7 @@ innerPseudo:
      <IDENT> | <FUNCTION> (<IDENT>)? ")"
 ;
 
-@FSTTerminal(name="{property}")
+@FSTTerminal(name="{property}", merge="LineBased")
 declaration:
     property ":" expr (prio)? ";"
 ;

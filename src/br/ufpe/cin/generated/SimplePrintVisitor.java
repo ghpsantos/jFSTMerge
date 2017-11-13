@@ -76,6 +76,8 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			for (FSTNode v : getChildren(nonTerminal,"declarationList")) {
 				v.accept(this);
 			}
+			hintIncIndent();
+			hintNewLine();
 			printToken("}");
 			printFeatures(nonTerminal,false);
 			return false;
