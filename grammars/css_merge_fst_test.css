@@ -1,28 +1,20 @@
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+@import url("fineprint.css") print;
+@import url("bluish.css") projection, tv;
+@import 'custom.css';
+@import url("chrome://communicator/skin/");
 
 th {
     background-color: #3399ff;
     color: #ffffff;
 }
 
+tr:hover,td,tr {
+    background-color: #cce6ff;
+    padding: 15px;
+}
+
 td, th {
     padding: 15px;
+    right: 200px;
     border-bottom: 1px solid #ddd;
-}
-
-tr:hover,
-td,
-tr {
-    background-color: #cce6ff;
-}
-
-.meta {
-    text-align: center;
-    width: 20px;
-}
-
-.meta input {
-    border: none;
-    width: 40px;
 }

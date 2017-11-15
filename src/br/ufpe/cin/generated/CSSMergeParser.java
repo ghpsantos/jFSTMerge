@@ -107,8 +107,9 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo stylesheet3(boolean inTerminal) throws ParseException {
                                             Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    n = importt(true);
-                         replaceName(n);
+    n = importt(inTerminal);
+                               replaceName("importt", n);
+                                                            replaceName(n);
     label_4:
     while (true) {
       if (jj_2_1(2)) {
@@ -116,10 +117,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       } else {
         break label_4;
       }
-      n = stylesheet2(true);
-                                                                             replaceName(n);
+      n = stylesheet2(inTerminal);
+                                                                                                                      replaceName(n);
     }
-                                                                                                 {if (true) return productionEndTerminal("stylesheet3","-","-","Replacement","Default",first,token);}
+                                                                                                                                          {if (true) return productionEndNonTerminal("stylesheet3","{importt}","{importt}");}
     throw new Error("Missing return statement in function");
   }
 
@@ -185,18 +186,19 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(IMPORT_SYM);
     n = inner_import(true);
-                                           replaceName(n);
+                                           replaceName("inner_import", n);
+                                                                             replaceName(n);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
       n = media_list(true);
-                                                                                 replaceName(n);
+                                                                                                                   replaceName(n);
       break;
     default:
       jj_la1[7] = jj_gen;
       ;
     }
     jj_consume_token(67);
-                                                                                                        {if (true) return productionEndTerminal("importt","-","-","Replacement","Default",first,token);}
+                                                                                                                                          {if (true) return productionEndTerminal("importt","{inner_import}","{inner_import}","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -206,11 +208,11 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case STRING:
       jj_consume_token(STRING);
-                  {if (true) return productionEndTerminal("inner_import1","-","-","Replacement","Default",first,token);}
+                  {if (true) return productionEndTerminal("inner_import1","-","{TOSTRING}","Replacement","Default",first,token);}
       break;
     case URI:
       jj_consume_token(URI);
-               {if (true) return productionEndTerminal("inner_import2","-","-","Replacement","Default",first,token);}
+               {if (true) return productionEndTerminal("inner_import2","-","{TOSTRING}","Replacement","Default",first,token);}
       break;
     default:
       jj_la1[8] = jj_gen;
@@ -1047,6 +1049,11 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     return false;
   }
 
+  final private boolean jj_3_1() {
+    if (jj_3R_15()) return true;
+    return false;
+  }
+
   final private boolean jj_3R_38() {
     if (jj_scan_token(IDENT)) return true;
     return false;
@@ -1177,11 +1184,6 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   final private boolean jj_3R_19() {
     if (jj_scan_token(CDO)) return true;
-    return false;
-  }
-
-  final private boolean jj_3_1() {
-    if (jj_3R_15()) return true;
     return false;
   }
 
