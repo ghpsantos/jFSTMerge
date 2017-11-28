@@ -191,11 +191,11 @@ TOKEN :
  |
   <PAGE_SYM: "@"<P><A><G><E> >
  |
-  <MEDIA_SYM: "@"<M><E><D><I><A> > : MEDIA_MATCH_ATTRIBUTES
- |
   <CHARSET_SYM: "@""c""h""a""r""s""e""t">
  |
   <IMPORTANT_SYM: "!"<I><M><P><O><R><T><A><N><T>>
+ |
+   <MEDIA_SYM: "@"<ident> > : MEDIA_MATCH_ATTRIBUTES
  |
   <EMS: <num><E><M> >
  |
@@ -241,8 +241,13 @@ TOKEN :
     <FUNCTION: <ident>"(" > : FUNCTION_MATCH_ATTRIBUTES
  |
     <COLON: ":" >
+ |
+    <RPAREN: ")" >
 
- | <RPAREN: ")" >
+ |
+   <CARET: "^" >
+ |
+   <ASTERISK: "*" >
  /*
   < LCURLY: "{" >
  |
@@ -327,10 +332,16 @@ inner_import:
 ;
 
 media:
-    <MEDIA_SYM> <MEDIA_ATTRIBUTES> "{" (ruleset)* "}"
+    <MEDIA_SYM> <MEDIA_ATTRIBUTES> "{" rulesetOrAttributes "}"
 ;
 
+rulesetOrAttributes:
+    (innerRulesetOrAttributes)*
+;
 
+innerRulesetOrAttributes:
+    LOOK_AHEAD(3) declarationList | ruleset
+;
 media_list:
     medium (inner_media_list)*
 ;
@@ -414,17 +425,20 @@ clazz:
 ;
 
 element_name:
-    <IDENT> | "*"
+    <IDENT> | "*" | "~"
 ;
 
 attrib:
-     "[" <IDENT> (innerAttrib)? "]"
+     "[" <IDENT> (<CARET>)? (<ASTERISK>)? (innerAttrib)? "]"
 ;
 
 innerAttrib:
-    innerAttrib1 <IDENT> | <STRING>
+    innerAttrib1 attribIdentOrString
 ;
 
+attribIdentOrString:
+    <IDENT> | <STRING>
+;
 innerAttrib1:
      "=" | <INCLUDES> | <DASHMATCH>
 ;
@@ -447,15 +461,19 @@ prio:
 ;
 
 expr:
-    term (innerExpr)*
+    termParen (innerExpr)*
 ;
 
 innerExpr:
-    (operator)? term
+    (operator)? termParen
+;
+
+termParen:
+    term (<RPAREN>)?
 ;
 
 term: (unary_operator)?
-    innerTermNumerals | <STRING> | <IDENT> | <URI> | hexcolor | function
+    innerTermNumerals | <STRING> | <IDENT> | <URI> | hexcolor | function | ":" | "."
 ;
 
 innerTermNumerals:
@@ -464,7 +482,7 @@ innerTermNumerals:
 ;
 
 function:
-    <FUNCTION> possible_funct_opts (<RPAREN>)?
+    <FUNCTION> possible_funct_opts (LOOK_AHEAD(2)<RPAREN>)?
 ;
 
 possible_funct_opts:

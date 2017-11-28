@@ -51,9 +51,9 @@ public interface CSSMergeParserConstants {
   int HASH = 50;
   int IMPORT_SYM = 51;
   int PAGE_SYM = 52;
-  int MEDIA_SYM = 53;
-  int CHARSET_SYM = 54;
-  int IMPORTANT_SYM = 55;
+  int CHARSET_SYM = 53;
+  int IMPORTANT_SYM = 54;
+  int MEDIA_SYM = 55;
   int EMS = 56;
   int EXS = 57;
   int LENGTH = 58;
@@ -67,8 +67,10 @@ public interface CSSMergeParserConstants {
   int FUNCTION = 66;
   int COLON = 67;
   int RPAREN = 68;
-  int MEDIA_ATTRIBUTES = 69;
-  int FUNCTION_ATTRIBUTES = 70;
+  int CARET = 69;
+  int ASTERISK = 70;
+  int MEDIA_ATTRIBUTES = 71;
+  int FUNCTION_ATTRIBUTES = 72;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
@@ -129,9 +131,9 @@ public interface CSSMergeParserConstants {
     "<HASH>",
     "<IMPORT_SYM>",
     "<PAGE_SYM>",
-    "<MEDIA_SYM>",
     "<CHARSET_SYM>",
     "<IMPORTANT_SYM>",
+    "<MEDIA_SYM>",
     "<EMS>",
     "<EXS>",
     "<LENGTH>",
@@ -145,6 +147,8 @@ public interface CSSMergeParserConstants {
     "<FUNCTION>",
     "\":\"",
     "\")\"",
+    "\"^\"",
+    "\"*\"",
     "<MEDIA_ATTRIBUTES>",
     "<FUNCTION_ATTRIBUTES>",
     "\";\"",
@@ -156,7 +160,7 @@ public interface CSSMergeParserConstants {
     "\">\"",
     "\"-\"",
     "\".\"",
-    "\"*\"",
+    "\"~\"",
     "\"[\"",
     "\"]\"",
     "\"=\"",
