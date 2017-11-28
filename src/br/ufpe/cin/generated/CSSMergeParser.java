@@ -56,10 +56,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       case HASH:
       case PAGE_SYM:
       case MEDIA_SYM:
-      case 71:
-      case 76:
-      case 77:
-      case 78:
+      case COLON:
+      case 79:
+      case 80:
+      case 81:
         ;
         break;
       default:
@@ -79,7 +79,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(CHARSET_SYM);
     jj_consume_token(STRING);
-    jj_consume_token(67);
+    jj_consume_token(71);
                                     {if (true) return productionEndTerminal("stylesheet1","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
@@ -130,10 +130,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
     case HASH:
-    case 71:
-    case 76:
-    case 77:
-    case 78:
+    case COLON:
+    case 79:
+    case 80:
+    case 81:
       n = ruleset(inTerminal);
                                replaceName("ruleset", n);
                                                             replaceName(n);
@@ -197,7 +197,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1[7] = jj_gen;
       ;
     }
-    jj_consume_token(67);
+    jj_consume_token(71);
                                                                                                                                           {if (true) return productionEndTerminal("importt","{inner_import}","{inner_import}","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
@@ -226,18 +226,17 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                       Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(MEDIA_SYM);
-    n = media_list(true);
-                                        replaceName(n);
-    jj_consume_token(68);
+    jj_consume_token(MEDIA_ATTRIBUTES);
+    jj_consume_token(72);
     label_6:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENT:
       case HASH:
-      case 71:
-      case 76:
-      case 77:
-      case 78:
+      case COLON:
+      case 79:
+      case 80:
+      case 81:
         ;
         break;
       default:
@@ -245,10 +244,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         break label_6;
       }
       n = ruleset(true);
-                                                                               replaceName(n);
+                                                             replaceName(n);
     }
-    jj_consume_token(69);
-                                                                                                       {if (true) return productionEndTerminal("media","-","-","Replacement","Default",first,token);}
+    jj_consume_token(73);
+                                                                                     {if (true) return productionEndTerminal("media","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -260,7 +259,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     label_7:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 70:
+      case 74:
         ;
         break;
       default:
@@ -277,7 +276,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo inner_media_list(boolean inTerminal) throws ParseException {
                                                  Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(70);
+    jj_consume_token(74);
     n = medium(true);
                             replaceName(n);
                                               {if (true) return productionEndTerminal("inner_media_list","-","-","Replacement","Default",first,token);}
@@ -297,7 +296,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(PAGE_SYM);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 71:
+    case COLON:
       n = pseudo_page(true);
                                          replaceName(n);
       break;
@@ -305,7 +304,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1[11] = jj_gen;
       ;
     }
-    jj_consume_token(68);
+    jj_consume_token(72);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
       n = declaration(true);
@@ -318,7 +317,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     label_8:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 67:
+      case 71:
         ;
         break;
       default:
@@ -328,7 +327,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       n = inner_page(true);
                                                                                                                             replaceName(n);
     }
-    jj_consume_token(69);
+    jj_consume_token(73);
                                                                                                                                                     {if (true) return productionEndTerminal("page","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
@@ -336,7 +335,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo inner_page(boolean inTerminal) throws ParseException {
                                            Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(67);
+    jj_consume_token(71);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
       n = declaration(true);
@@ -353,9 +352,20 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo pseudo_page(boolean inTerminal) throws ParseException {
                                             Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(71);
+    label_9:
+    while (true) {
+      jj_consume_token(COLON);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COLON:
+        ;
+        break;
+      default:
+        jj_la1[15] = jj_gen;
+        break label_9;
+      }
+    }
     jj_consume_token(IDENT);
-                     {if (true) return productionEndTerminal("pseudo_page","-","-","Replacement","Default",first,token);}
+                            {if (true) return productionEndTerminal("pseudo_page","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -363,16 +373,16 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                          Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 72:
-      jj_consume_token(72);
+    case 75:
+      jj_consume_token(75);
               {if (true) return productionEndTerminal("operator1","-","-","Replacement","Default",first,token);}
       break;
-    case 70:
-      jj_consume_token(70);
+    case 74:
+      jj_consume_token(74);
               {if (true) return productionEndTerminal("operator2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -383,16 +393,16 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                            Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 73:
-      jj_consume_token(73);
+    case 76:
+      jj_consume_token(76);
               {if (true) return productionEndTerminal("combinator1","-","-","Replacement","Default",first,token);}
       break;
-    case 74:
-      jj_consume_token(74);
+    case 77:
+      jj_consume_token(77);
               {if (true) return productionEndTerminal("combinator2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[16] = jj_gen;
+      jj_la1[17] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -403,16 +413,16 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                                Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 75:
-      jj_consume_token(75);
+    case 78:
+      jj_consume_token(78);
               {if (true) return productionEndTerminal("unary_operator1","-","-","Replacement","Default",first,token);}
       break;
-    case 73:
-      jj_consume_token(73);
+    case 76:
+      jj_consume_token(76);
               {if (true) return productionEndTerminal("unary_operator2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[18] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -433,36 +443,36 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     n = selector(inTerminal);
                                 replaceName("selector", n);
                                                               replaceName(n);
-    label_9:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 70:
-        ;
-        break;
-      default:
-        jj_la1[18] = jj_gen;
-        break label_9;
-      }
-      jj_consume_token(70);
-      n = selector(inTerminal);
-                                                                                                            replaceName("selector", n);
-                                                                                                                                          replaceName(n);
-    }
-    jj_consume_token(68);
     label_10:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IDENT:
+      case 74:
         ;
         break;
       default:
         jj_la1[19] = jj_gen;
         break label_10;
       }
+      jj_consume_token(74);
+      n = selector(inTerminal);
+                                                                                                            replaceName("selector", n);
+                                                                                                                                          replaceName(n);
+    }
+    jj_consume_token(72);
+    label_11:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENT:
+        ;
+        break;
+      default:
+        jj_la1[20] = jj_gen;
+        break label_11;
+      }
       n = declarationList(inTerminal);
                                                                                                                                                                                                  replaceName(n);
     }
-    jj_consume_token(69);
+    jj_consume_token(73);
                                                                                                                                                                                                                          {if (true) return productionEndNonTerminal("ruleset","{selector}^-","{selector}^-");}
     throw new Error("Missing return statement in function");
   }
@@ -472,12 +482,12 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     n = declaration(inTerminal);
                                    replaceName(n);
-    label_11:
+    label_12:
     while (true) {
       if (jj_2_2(2)) {
         ;
       } else {
-        break label_11;
+        break label_12;
       }
       n = declaration(inTerminal);
                                                                                              replaceName(n);
@@ -494,17 +504,17 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
     case HASH:
-    case 71:
-    case 73:
-    case 74:
+    case COLON:
     case 76:
     case 77:
-    case 78:
+    case 79:
+    case 80:
+    case 81:
       n = inner_selector(true);
                                                                            replaceName(n);
       break;
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[21] = jj_gen;
       ;
     }
                                                                                               {if (true) return productionEndTerminal("selector","{TOSTRING}","{TOSTRING}","Replacement","Default",first,token);}
@@ -522,18 +532,18 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENT:
       case HASH:
-      case 71:
-      case 73:
-      case 74:
+      case COLON:
       case 76:
       case 77:
-      case 78:
+      case 79:
+      case 80:
+      case 81:
         n = inner_selector2(true);
                                  replaceName(n);
                                                    {if (true) return productionEndTerminal("inner_selector2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[21] = jj_gen;
+        jj_la1[22] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -556,13 +566,13 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                                 Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 73:
-    case 74:
+    case 76:
+    case 77:
       n = combinator(true);
                              replaceName(n);
       break;
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[23] = jj_gen;
       ;
     }
     n = selector(true);
@@ -576,15 +586,15 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENT:
-    case 77:
+    case 80:
       n = element_name(true);
                               replaceName(n);
-      label_12:
+      label_13:
       while (true) {
         if (jj_2_4(2)) {
           ;
         } else {
-          break label_12;
+          break label_13;
         }
         n = inner_simple_selector(true);
                                                                                             replaceName(n);
@@ -592,23 +602,23 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                                                                                                 {if (true) return productionEndTerminal("simple_selector1","-","-","Replacement","Default",first,token);}
       break;
     case HASH:
-    case 71:
-    case 76:
-    case 78:
-      label_13:
+    case COLON:
+    case 79:
+    case 81:
+      label_14:
       while (true) {
         n = inner_simple_selector(true);
                                                      replaceName(n);
         if (jj_2_5(2)) {
           ;
         } else {
-          break label_13;
+          break label_14;
         }
       }
                                                                          {if (true) return productionEndTerminal("simple_selector2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[23] = jj_gen;
+      jj_la1[24] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -623,23 +633,23 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_consume_token(HASH);
                 {if (true) return productionEndTerminal("inner_simple_selector1","-","-","Replacement","Default",first,token);}
       break;
-    case 76:
+    case 79:
       n = clazz(true);
                        replaceName(n);
                                          {if (true) return productionEndTerminal("inner_simple_selector2","-","-","Replacement","Default",first,token);}
       break;
-    case 78:
+    case 81:
       n = attrib(true);
                         replaceName(n);
                                           {if (true) return productionEndTerminal("inner_simple_selector3","-","-","Replacement","Default",first,token);}
       break;
-    case 71:
+    case COLON:
       n = pseudo(true);
                         replaceName(n);
                                           {if (true) return productionEndTerminal("inner_simple_selector4","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[25] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -649,7 +659,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo clazz(boolean inTerminal) throws ParseException {
                                       Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(76);
+    jj_consume_token(79);
     jj_consume_token(IDENT);
                      {if (true) return productionEndTerminal("clazz","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
@@ -663,12 +673,12 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_consume_token(IDENT);
                  {if (true) return productionEndTerminal("element_name1","-","-","Replacement","Default",first,token);}
       break;
-    case 77:
-      jj_consume_token(77);
+    case 80:
+      jj_consume_token(80);
               {if (true) return productionEndTerminal("element_name2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[26] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -678,21 +688,21 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo attrib(boolean inTerminal) throws ParseException {
                                        Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(78);
+    jj_consume_token(81);
     jj_consume_token(IDENT);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INCLUDES:
     case DASHMATCH:
     case STRING:
-    case 80:
+    case 83:
       n = innerAttrib(true);
                                           replaceName(n);
       break;
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[27] = jj_gen;
       ;
     }
-    jj_consume_token(79);
+    jj_consume_token(82);
                                                                  {if (true) return productionEndTerminal("attrib","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
@@ -703,7 +713,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INCLUDES:
     case DASHMATCH:
-    case 80:
+    case 83:
       n = innerAttrib1(true);
                               replaceName(n);
       jj_consume_token(IDENT);
@@ -714,7 +724,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                   {if (true) return productionEndTerminal("innerAttrib2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[28] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -725,8 +735,8 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                              Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 80:
-      jj_consume_token(80);
+    case 83:
+      jj_consume_token(83);
               {if (true) return productionEndTerminal("innerAttrib11","-","-","Replacement","Default",first,token);}
       break;
     case INCLUDES:
@@ -738,7 +748,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                      {if (true) return productionEndTerminal("innerAttrib13","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[28] = jj_gen;
+      jj_la1[29] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -748,10 +758,21 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   final public FSTInfo pseudo(boolean inTerminal) throws ParseException {
                                        Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(71);
+    label_15:
+    while (true) {
+      jj_consume_token(COLON);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COLON:
+        ;
+        break;
+      default:
+        jj_la1[30] = jj_gen;
+        break label_15;
+      }
+    }
     n = innerPseudo(true);
-                                 replaceName(n);
-                                                   {if (true) return productionEndTerminal("pseudo","-","-","Replacement","Default",first,token);}
+                                        replaceName(n);
+                                                          {if (true) return productionEndTerminal("pseudo","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -765,19 +786,12 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       break;
     case FUNCTION:
       jj_consume_token(FUNCTION);
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IDENT:
-        jj_consume_token(IDENT);
-        break;
-      default:
-        jj_la1[29] = jj_gen;
-        ;
-      }
-      jj_consume_token(81);
-                                  {if (true) return productionEndTerminal("innerPseudo2","-","-","Replacement","Default",first,token);}
+      jj_consume_token(FUNCTION_ATTRIBUTES);
+      jj_consume_token(RPAREN);
+                                              {if (true) return productionEndTerminal("innerPseudo2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[31] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -790,7 +804,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     n = property(true);
                           replaceName("property", n);
                                                         replaceName(n);
-    jj_consume_token(71);
+    jj_consume_token(COLON);
     n = expr(true);
                                                                                            replaceName(n);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -799,10 +813,10 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                                                                                                            replaceName(n);
       break;
     default:
-      jj_la1[31] = jj_gen;
+      jj_la1[32] = jj_gen;
       ;
     }
-    jj_consume_token(67);
+    jj_consume_token(71);
                                                                                                                                                   {if (true) return productionEndTerminal("declaration","{property}","{property}","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
@@ -820,7 +834,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
      first=getToken(1); productionStart(inTerminal);
     n = term(true);
                       replaceName(n);
-    label_14:
+    label_16:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case STRING:
@@ -836,15 +850,15 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       case NUMBER:
       case URI:
       case FUNCTION:
-      case 70:
-      case 72:
-      case 73:
+      case 74:
       case 75:
+      case 76:
+      case 78:
         ;
         break;
       default:
-        jj_la1[32] = jj_gen;
-        break label_14;
+        jj_la1[33] = jj_gen;
+        break label_16;
       }
       n = innerExpr(true);
                                                            replaceName(n);
@@ -857,13 +871,13 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                           Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 70:
-    case 72:
+    case 74:
+    case 75:
       n = operator(true);
                            replaceName(n);
       break;
     default:
-      jj_la1[33] = jj_gen;
+      jj_la1[34] = jj_gen;
       ;
     }
     n = term(true);
@@ -884,16 +898,16 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     case FREQ:
     case PERCENTAGE:
     case NUMBER:
-    case 73:
-    case 75:
+    case 76:
+    case 78:
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 73:
-      case 75:
+      case 76:
+      case 78:
         n = unary_operator(true);
                                  replaceName(n);
         break;
       default:
-        jj_la1[34] = jj_gen;
+        jj_la1[35] = jj_gen;
         ;
       }
       n = innerTermNumerals(true);
@@ -923,7 +937,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                             {if (true) return productionEndTerminal("term6","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[35] = jj_gen;
+      jj_la1[36] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -967,7 +981,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                 {if (true) return productionEndTerminal("innerTermNumerals8","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[36] = jj_gen;
+      jj_la1[37] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -978,10 +992,63 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
                                          Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(FUNCTION);
-    n = expr(true);
-                                 replaceName(n);
-    jj_consume_token(81);
-                                                       {if (true) return productionEndTerminal("function","-","-","Replacement","Default",first,token);}
+    n = possible_funct_opts(true);
+                                                replaceName(n);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case RPAREN:
+      jj_consume_token(RPAREN);
+      break;
+    default:
+      jj_la1[38] = jj_gen;
+      ;
+    }
+                                                                             {if (true) return productionEndTerminal("function","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo possible_funct_opts(boolean inTerminal) throws ParseException {
+                                                    Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    if (jj_2_7(2)) {
+      n = inner_func_attrs(true);
+                                               replaceName(n);
+      label_17:
+      while (true) {
+        if (jj_2_6(2)) {
+          ;
+        } else {
+          break label_17;
+        }
+        jj_consume_token(74);
+        n = inner_func_attrs(true);
+                                                                                                            replaceName(n);
+      }
+                                                                                                                                {if (true) return productionEndTerminal("possible_funct_opts1","-","-","Replacement","Default",first,token);}
+    } else {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FUNCTION_ATTRIBUTES:
+        jj_consume_token(FUNCTION_ATTRIBUTES);
+                               {if (true) return productionEndTerminal("possible_funct_opts2","-","-","Replacement","Default",first,token);}
+        break;
+      default:
+        jj_la1[39] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo inner_func_attrs(boolean inTerminal) throws ParseException {
+                                                 Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    jj_consume_token(FUNCTION_ATTRIBUTES);
+    if (jj_2_8(2)) {
+      jj_consume_token(RPAREN);
+    } else {
+      ;
+    }
+                                                       {if (true) return productionEndTerminal("inner_func_attrs","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1028,111 +1095,101 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     finally { jj_save(4, xla); }
   }
 
-  final private boolean jj_3R_37() {
+  final private boolean jj_2_6(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_6(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(5, xla); }
+  }
+
+  final private boolean jj_2_7(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_7(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(6, xla); }
+  }
+
+  final private boolean jj_2_8(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_8(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(7, xla); }
+  }
+
+  final private boolean jj_3R_41() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_40()) {
+    if (jj_3R_44()) {
     jj_scanpos = xsp;
-    if (jj_3R_41()) return true;
+    if (jj_3R_45()) return true;
     }
-    return false;
-  }
-
-  final private boolean jj_3R_16() {
-    if (jj_3R_21()) return true;
-    if (jj_scan_token(71)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_39() {
-    if (jj_scan_token(FUNCTION)) return true;
     return false;
   }
 
   final private boolean jj_3_1() {
-    if (jj_3R_15()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_38() {
-    if (jj_scan_token(IDENT)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_23() {
-    if (jj_3R_30()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_31() {
-    if (jj_scan_token(76)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_27() {
-    if (jj_3R_33()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_2() {
-    if (jj_3R_16()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_36() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_38()) {
-    jj_scanpos = xsp;
-    if (jj_3R_39()) return true;
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_26() {
-    if (jj_3R_32()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_25() {
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_24() {
-    if (jj_scan_token(HASH)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_33() {
-    if (jj_scan_token(71)) return true;
-    if (jj_3R_36()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_5() {
     if (jj_3R_18()) return true;
     return false;
   }
 
-  final private boolean jj_3R_18() {
+  final private boolean jj_3R_35() {
+    if (jj_scan_token(79)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_31() {
+    if (jj_3R_37()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_2() {
+    if (jj_3R_19()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_30() {
+    if (jj_3R_36()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_29() {
+    if (jj_3R_35()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_28() {
+    if (jj_scan_token(HASH)) return true;
+    return false;
+  }
+
+  final private boolean jj_3_6() {
+    if (jj_scan_token(74)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_21() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_24()) {
+    if (jj_3R_28()) {
     jj_scanpos = xsp;
-    if (jj_3R_25()) {
+    if (jj_3R_29()) {
     jj_scanpos = xsp;
-    if (jj_3R_26()) {
+    if (jj_3R_30()) {
     jj_scanpos = xsp;
-    if (jj_3R_27()) return true;
+    if (jj_3R_31()) return true;
     }
     }
     }
     return false;
   }
 
-  final private boolean jj_3R_35() {
+  final private boolean jj_3_5() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_39() {
     Token xsp;
     if (jj_3_5()) return true;
     while (true) {
@@ -1142,94 +1199,159 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     return false;
   }
 
-  final private boolean jj_3R_34() {
-    if (jj_3R_37()) return true;
+  final private boolean jj_3R_38() {
+    if (jj_3R_41()) return true;
     return false;
   }
 
-  final private boolean jj_3R_21() {
+  final private boolean jj_3R_34() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_38()) {
+    jj_scanpos = xsp;
+    if (jj_3R_39()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_20() {
+    if (jj_3R_26()) return true;
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_3() {
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_8() {
+    if (jj_scan_token(RPAREN)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_19() {
+    if (jj_3R_25()) return true;
+    if (jj_scan_token(COLON)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_43() {
+    if (jj_scan_token(FUNCTION)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_27() {
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_42() {
     if (jj_scan_token(IDENT)) return true;
     return false;
   }
 
-  final private boolean jj_3R_30() {
+  final private boolean jj_3R_40() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_34()) {
+    if (jj_3R_42()) {
     jj_scanpos = xsp;
-    if (jj_3R_35()) return true;
+    if (jj_3R_43()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_37() {
+    Token xsp;
+    if (jj_scan_token(67)) return true;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_scan_token(67)) { jj_scanpos = xsp; break; }
+    }
+    if (jj_3R_40()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_25() {
+    if (jj_scan_token(IDENT)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_22() {
+    if (jj_scan_token(FUNCTION_ATTRIBUTES)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_8()) jj_scanpos = xsp;
+    return false;
+  }
+
+  final private boolean jj_3_7() {
+    if (jj_3R_22()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_6()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
   final private boolean jj_3_4() {
-    if (jj_3R_18()) return true;
+    if (jj_3R_21()) return true;
     return false;
   }
 
-  final private boolean jj_3R_29() {
-    if (jj_scan_token(74)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_20() {
+  final private boolean jj_3R_24() {
     if (jj_scan_token(CDC)) return true;
     return false;
   }
 
-  final private boolean jj_3R_28() {
-    if (jj_scan_token(73)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_19() {
-    if (jj_scan_token(CDO)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_17() {
-    if (jj_3R_22()) return true;
-    if (jj_3R_23()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_32() {
-    if (jj_scan_token(78)) return true;
-    if (jj_scan_token(IDENT)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_15() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_19()) {
-    jj_scanpos = xsp;
-    if (jj_3R_20()) return true;
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_22() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_28()) {
-    jj_scanpos = xsp;
-    if (jj_3R_29()) return true;
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_41() {
+  final private boolean jj_3R_33() {
     if (jj_scan_token(77)) return true;
     return false;
   }
 
-  final private boolean jj_3_3() {
-    if (jj_3R_17()) return true;
+  final private boolean jj_3R_23() {
+    if (jj_scan_token(CDO)) return true;
     return false;
   }
 
-  final private boolean jj_3R_40() {
+  final private boolean jj_3R_32() {
+    if (jj_scan_token(76)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_18() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_23()) {
+    jj_scanpos = xsp;
+    if (jj_3R_24()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_26() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_32()) {
+    jj_scanpos = xsp;
+    if (jj_3R_33()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_36() {
+    if (jj_scan_token(81)) return true;
+    if (jj_scan_token(IDENT)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_45() {
+    if (jj_scan_token(80)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_44() {
     if (jj_scan_token(IDENT)) return true;
     return false;
   }
@@ -1242,7 +1364,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
   public boolean lookingAhead = false;
   private boolean jj_semLA;
   private int jj_gen;
-  final private int[] jj_la1 = new int[37];
+  final private int[] jj_la1 = new int[40];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1252,15 +1374,15 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
       jj_la1_2();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x400000,0x1800,0x80000,0x360000,0x1800,0x360000,0x1800,0x20000,0x8000,0x60000,0x0,0x0,0x20000,0x0,0x20000,0x0,0x0,0x0,0x0,0x20000,0x60000,0x60000,0x0,0x60000,0x40000,0x20000,0xe000,0xe000,0x6000,0x20000,0x20000,0x800000,0xbf068000,0x0,0x0,0xbf068000,0xbf000000,};
+      jj_la1_1 = new int[] {0x400000,0x1800,0x80000,0x360000,0x1800,0x360000,0x1800,0x20000,0x8000,0x60000,0x0,0x0,0x20000,0x0,0x20000,0x0,0x0,0x0,0x0,0x0,0x20000,0x60000,0x60000,0x0,0x60000,0x40000,0x20000,0xe000,0xe000,0x6000,0x0,0x20000,0x800000,0xbf068000,0x0,0x0,0xbf068000,0xbf000000,0x0,0x0,};
    }
    private static void jj_la1_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x7080,0x0,0x7080,0x0,0x0,0x2,0x7080,0x40,0x80,0x0,0x8,0x0,0x140,0x600,0xa00,0x40,0x0,0x7680,0x7680,0x600,0x7080,0x5080,0x2000,0x10000,0x10000,0x10000,0x0,0x4,0x0,0xb47,0x140,0xa00,0xa07,0x1,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x38008,0x0,0x38008,0x0,0x0,0x2,0x38008,0x400,0x8,0x0,0x80,0x0,0x8,0xc00,0x3000,0x5000,0x400,0x0,0x3b008,0x3b008,0x3000,0x38008,0x28008,0x10000,0x80000,0x80000,0x80000,0x8,0x4,0x0,0x5c07,0xc00,0x5000,0x5007,0x1,0x10,0x40,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[5];
+  final private JJCalls[] jj_2_rtns = new JJCalls[8];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -1269,7 +1391,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 37; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 40; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1278,7 +1400,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 37; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 40; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1287,7 +1409,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 37; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 40; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1296,7 +1418,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 37; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 40; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1407,15 +1529,15 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   public ParseException generateParseException() {
     jj_expentries.removeAllElements();
-    boolean[] la1tokens = new boolean[82];
-    for (int i = 0; i < 82; i++) {
+    boolean[] la1tokens = new boolean[84];
+    for (int i = 0; i < 84; i++) {
       la1tokens[i] = false;
     }
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 37; i++) {
+    for (int i = 0; i < 40; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1430,7 +1552,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
         }
       }
     }
-    for (int i = 0; i < 82; i++) {
+    for (int i = 0; i < 84; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -1455,7 +1577,7 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
 
   final private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 8; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1467,6 +1589,9 @@ public class CSSMergeParser extends AbstractFSTParser implements CSSMergeParserC
             case 2: jj_3_3(); break;
             case 3: jj_3_4(); break;
             case 4: jj_3_5(); break;
+            case 5: jj_3_6(); break;
+            case 6: jj_3_7(); break;
+            case 7: jj_3_8(); break;
           }
         }
         p = p.next;

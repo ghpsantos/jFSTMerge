@@ -165,13 +165,6 @@ TOKEN :
   <#Z: "z"|("\\0"){0,4}("5a"|"7a")("\r""\n"|[ "\t","\r","\n","\f"])? | "\\z">
 
 
-/*
-baduri1         url\({w}([!#$%&*-\[\]-~]|{nonascii}|{escape})*{w}
-baduri2         url\({w}{string}{w}
-baduri3         url\({w}{badstring}
-
-é ncessesário adicionar mesmo?
-*/
 }
 
 /* TOKEN DEFINITION */
@@ -198,7 +191,7 @@ TOKEN :
  |
   <PAGE_SYM: "@"<P><A><G><E> >
  |
-  <MEDIA_SYM: "@"<M><E><D><I><A> >
+  <MEDIA_SYM: "@"<M><E><D><I><A> > : MEDIA_MATCH_ATTRIBUTES
  |
   <CHARSET_SYM: "@""c""h""a""r""s""e""t">
  |
@@ -245,7 +238,11 @@ TOKEN :
    <URI: "url("<string>")" |
           "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
  |
-    <FUNCTION: <ident>"(" >
+    <FUNCTION: <ident>"(" > : FUNCTION_MATCH_ATTRIBUTES
+ |
+    <COLON: ":" >
+
+ | <RPAREN: ")" >
  /*
   < LCURLY: "{" >
  |
@@ -260,10 +257,22 @@ TOKEN :
    <RBRACKET: "]" >
  |
    <SEMICOLON: ";" >
- |
-   <COLON: ":" >*/
+ */
 
 }
+
+<MEDIA_MATCH_ATTRIBUTES>
+TOKEN:
+{
+    <MEDIA_ATTRIBUTES: (~["{"])+> : DEFAULT
+}
+
+<FUNCTION_MATCH_ATTRIBUTES>
+TOKEN:
+{
+    <FUNCTION_ATTRIBUTES: (~[")"])+> : DEFAULT
+}
+
 
 GRAMMARSTART
 
@@ -318,8 +327,9 @@ inner_import:
 ;
 
 media:
-    <MEDIA_SYM> media_list "{" (ruleset)* "}"
+    <MEDIA_SYM> <MEDIA_ATTRIBUTES> "{" (ruleset)* "}"
 ;
+
 
 media_list:
     medium (inner_media_list)*
@@ -343,7 +353,7 @@ inner_page:
 ;
 
 pseudo_page:
-    ":" <IDENT>
+    (<COLON>)+ <IDENT>
  ;
 
 operator:
@@ -420,11 +430,11 @@ innerAttrib1:
 ;
 
 pseudo:
-    ":" innerPseudo
+    (<COLON>)+ innerPseudo
 ;
 
 innerPseudo:
-     <IDENT> | <FUNCTION> (<IDENT>)? ")"
+     <IDENT> | <FUNCTION> <FUNCTION_ATTRIBUTES> ")"
 ;
 
 @FSTTerminal(name="{property}", merge="LineBased")
@@ -454,8 +464,16 @@ innerTermNumerals:
 ;
 
 function:
-    <FUNCTION> expr ")"
+    <FUNCTION> possible_funct_opts (<RPAREN>)?
 ;
+
+possible_funct_opts:
+  LOOK_AHEAD(2) inner_func_attrs ( LOOK_AHEAD(2) "," inner_func_attrs)* | <FUNCTION_ATTRIBUTES>
+;
+inner_func_attrs:
+  <FUNCTION_ATTRIBUTES> (LOOK_AHEAD(2) <RPAREN>)?
+;
+
 
 hexcolor:
     <HASH>

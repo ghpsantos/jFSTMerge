@@ -65,9 +65,15 @@ public interface CSSMergeParserConstants {
   int NUMBER = 64;
   int URI = 65;
   int FUNCTION = 66;
+  int COLON = 67;
+  int RPAREN = 68;
+  int MEDIA_ATTRIBUTES = 69;
+  int FUNCTION_ATTRIBUTES = 70;
 
   int DEFAULT = 0;
   int IN_MULTI_LINE_COMMENT = 1;
+  int MEDIA_MATCH_ATTRIBUTES = 2;
+  int FUNCTION_MATCH_ATTRIBUTES = 3;
 
   String[] tokenImage = {
     "<EOF>",
@@ -137,11 +143,14 @@ public interface CSSMergeParserConstants {
     "<NUMBER>",
     "<URI>",
     "<FUNCTION>",
+    "\":\"",
+    "\")\"",
+    "<MEDIA_ATTRIBUTES>",
+    "<FUNCTION_ATTRIBUTES>",
     "\";\"",
     "\"{\"",
     "\"}\"",
     "\",\"",
-    "\":\"",
     "\"/\"",
     "\"+\"",
     "\">\"",
@@ -151,7 +160,6 @@ public interface CSSMergeParserConstants {
     "\"[\"",
     "\"]\"",
     "\"=\"",
-    "\")\"",
   };
 
 }

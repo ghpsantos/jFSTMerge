@@ -165,13 +165,6 @@ TOKEN :
   <#Z: "z"|("\\0"){0,4}("5a"|"7a")("\r""\n"|[ "\t","\r","\n","\f"])? | "\\z">
 
 
-/*
-baduri1         url\({w}([!#$%&*-\[\]-~]|{nonascii}|{escape})*{w}
-baduri2         url\({w}{string}{w}
-baduri3         url\({w}{badstring}
-
-é ncessesário adicionar mesmo?
-*/
 }
 
 /* TOKEN DEFINITION */
@@ -198,7 +191,7 @@ TOKEN :
  |
   <PAGE_SYM: "@"<P><A><G><E> >
  |
-  <MEDIA_SYM: "@"<M><E><D><I><A> >
+  <MEDIA_SYM: "@"<M><E><D><I><A> > : MEDIA_MATCH_ATTRIBUTES
  |
   <CHARSET_SYM: "@""c""h""a""r""s""e""t">
  |
@@ -245,7 +238,11 @@ TOKEN :
    <URI: "url("<string>")" |
           "url("( ["!","#","$","%","&","*","-","~"] | <nonascii> | <escape>)* ")" >
  |
-    <FUNCTION: <ident>"(" >
+    <FUNCTION: <ident>"(" > : FUNCTION_MATCH_ATTRIBUTES
+ |
+    <COLON: ":" >
+
+ | <RPAREN: ")" >
  /*
   < LCURLY: "{" >
  |
@@ -260,9 +257,20 @@ TOKEN :
    <RBRACKET: "]" >
  |
    <SEMICOLON: ";" >
- |
-   <COLON: ":" >*/
+ */
 
+}
+
+<MEDIA_MATCH_ATTRIBUTES>
+TOKEN:
+{
+    <MEDIA_ATTRIBUTES: (~["{"])+> : DEFAULT
+}
+
+<FUNCTION_MATCH_ATTRIBUTES>
+TOKEN:
+{
+    <FUNCTION_ATTRIBUTES: (~[")"])+> : DEFAULT
 }
 FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
@@ -322,7 +330,7 @@ FSTInfo inner_import(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo media(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<MEDIA_SYM> n=media_list(true){ replaceName(n);} "{" (n=ruleset(true){ replaceName(n);})* "}" {return productionEndTerminal("media","-","-","Replacement","Default",first,token);}
+	<MEDIA_SYM> <MEDIA_ATTRIBUTES> "{" (n=ruleset(true){ replaceName(n);})* "}" {return productionEndTerminal("media","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -358,7 +366,7 @@ FSTInfo inner_page(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo pseudo_page(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	":" <IDENT> {return productionEndTerminal("pseudo_page","-","-","Replacement","Default",first,token);}
+	(<COLON>)+ <IDENT> {return productionEndTerminal("pseudo_page","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -490,7 +498,7 @@ FSTInfo innerAttrib1(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo pseudo(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	":" n=innerPseudo(true){ replaceName(n);} {return productionEndTerminal("pseudo","-","-","Replacement","Default",first,token);}
+	(<COLON>)+ n=innerPseudo(true){ replaceName(n);} {return productionEndTerminal("pseudo","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -498,7 +506,7 @@ FSTInfo innerPseudo(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	<IDENT> {return productionEndTerminal("innerPseudo1","-","-","Replacement","Default",first,token);}
  |
-	<FUNCTION> [<IDENT>] ")" {return productionEndTerminal("innerPseudo2","-","-","Replacement","Default",first,token);}
+	<FUNCTION> <FUNCTION_ATTRIBUTES> ")" {return productionEndTerminal("innerPseudo2","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -564,7 +572,21 @@ FSTInfo innerTermNumerals(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo function(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<FUNCTION> n=expr(true){ replaceName(n);} ")" {return productionEndTerminal("function","-","-","Replacement","Default",first,token);}
+	<FUNCTION> n=possible_funct_opts(true){ replaceName(n);} [<RPAREN>] {return productionEndTerminal("function","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo possible_funct_opts(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	LOOKAHEAD(2) n=inner_func_attrs(true){ replaceName(n);} (LOOKAHEAD(2) "," n=inner_func_attrs(true){ replaceName(n);})* {return productionEndTerminal("possible_funct_opts1","-","-","Replacement","Default",first,token);}
+ |
+	<FUNCTION_ATTRIBUTES> {return productionEndTerminal("possible_funct_opts2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo inner_func_attrs(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<FUNCTION_ATTRIBUTES> [LOOKAHEAD(2) <RPAREN>] {return productionEndTerminal("inner_func_attrs","-","-","Replacement","Default",first,token);}
 
  )  }
 

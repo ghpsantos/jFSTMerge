@@ -1,20 +1,11 @@
-@import url("fineprint.css") print;
-@import url("bluish.css") projection, tv;
-@import 'custom.css';
-@import url("chrome://communicator/skin/");
+.sign .front h1 span#big{
+    margin-bottom: 15px;
+    letter-spacing: 8px;
+    color: rgb(218, 58, 58);
+    font-size: 28px;
+    text-transform: uppercase;
 
-th {
-    background-color: #3399ff;
-    color: #ffffff;
-}
-
-tr:hover,td,tr {
-    background-color: #cce6ff;
-    padding: 15px;
-}
-
-td, th {
-    padding: 15px;
-    right: 200px;
-    border-bottom: 1px solid #ddd;
+    background: -webkit-linear-gradient( rgb(237, 105, 105),  rgb(218, 58, 58));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

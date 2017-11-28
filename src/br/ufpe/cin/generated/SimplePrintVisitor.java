@@ -133,6 +133,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("term3") && expectedType.equals("term")) return true;
 		if (type.equals("element_name1") && expectedType.equals("element_name")) return true;
 		if (type.equals("unary_operator1") && expectedType.equals("unary_operator")) return true;
+		if (type.equals("possible_funct_opts2") && expectedType.equals("possible_funct_opts")) return true;
 		if (type.equals("inner_selector1") && expectedType.equals("inner_selector")) return true;
 		if (type.equals("innerPseudo1") && expectedType.equals("innerPseudo")) return true;
 		if (type.equals("stylesheet21") && expectedType.equals("stylesheet2")) return true;
@@ -155,6 +156,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("term4") && expectedType.equals("term")) return true;
 		if (type.equals("innerTermNumerals1") && expectedType.equals("innerTermNumerals")) return true;
 		if (type.equals("element_name2") && expectedType.equals("element_name")) return true;
+		if (type.equals("possible_funct_opts1") && expectedType.equals("possible_funct_opts")) return true;
 		if (type.equals("unary_operator2") && expectedType.equals("unary_operator")) return true;
 		return false;
 	}
