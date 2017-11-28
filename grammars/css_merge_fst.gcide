@@ -311,7 +311,9 @@ stylesheet3:
 stylesheet4:
     @FSTNonTerminal(name="{ruleset}")
      ruleset |
+    @FSTNonTerminal(name="{media}")
      media |
+    @FSTNonTerminal(name="{page}")
      page
 ;
 
@@ -331,14 +333,26 @@ inner_import:
     <STRING>|<URI>
 ;
 
+@FSTNonTerminal(name="{media_match}-{media_attr}")
 media:
-    <MEDIA_SYM> <MEDIA_ATTRIBUTES> "{" rulesetOrAttributes "}"
+    media_match media_attr "{" rulesetOrAttributes "}"
 ;
 
+@FSTTerminal(name="{TOSTRING}")
+media_match:
+     <MEDIA_SYM>
+;
+
+@FSTTerminal(name="{TOSTRING}")
+media_attr:
+    <MEDIA_ATTRIBUTES>
+;
+@FSTNonTerminal()
 rulesetOrAttributes:
     (innerRulesetOrAttributes)*
 ;
 
+@FSTNonTerminal()
 innerRulesetOrAttributes:
     LOOK_AHEAD(3) declarationList | ruleset
 ;
@@ -354,15 +368,18 @@ medium:
      <IDENT>
 ;
 
+@FSTNonTerminal(name="{page_match}-{pseudo_page}")
 page:
-    <PAGE_SYM> (pseudo_page)?
-    "{" (declaration)? (inner_page)* "}"
+    page_match (pseudo_page)?
+    "{" ( declarationList)* "}"
 ;
 
-inner_page:
-    ";" (declaration)?
+@FSTTerminal(name="{TOSTRING}")
+page_match:
+    <PAGE_SYM>
 ;
 
+@FSTTerminal(name="{TOSTRING}")
 pseudo_page:
     (<COLON>)+ <IDENT>
  ;
@@ -381,7 +398,7 @@ unary_operator:
 
 @FSTExportName("{TOSTRING}")
 property:
-    <IDENT>
+    (<ASTERISK>)? <IDENT>
 ;
 
 @FSTNonTerminal(name="{selector}^-")

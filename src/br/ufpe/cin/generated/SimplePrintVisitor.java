@@ -62,6 +62,28 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
+		if (nonTerminal.getType().equals("stylesheet42")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "media");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("stylesheet43")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "page");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
 		if (nonTerminal.getType().equals("stylesheet5")) {
 			printFeatures(nonTerminal,true);
 			{
@@ -73,6 +95,83 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			for (FSTNode v : getChildren(nonTerminal,"stylesheet2")) {
 				v.accept(this);
 			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("media")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "media_match");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "media_attr");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken("{");
+			{
+				FSTNode v=getChild(nonTerminal, "rulesetOrAttributes");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken("}");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("rulesetOrAttributes")) {
+			printFeatures(nonTerminal,true);
+			for (FSTNode v : getChildren(nonTerminal,"innerRulesetOrAttributes")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("innerRulesetOrAttributes1")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "declarationList");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("innerRulesetOrAttributes2")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "ruleset");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("page")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "page_match");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "pseudo_page");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken("{");
+			for (FSTNode v : getChildren(nonTerminal,"declarationList")) {
+				v.accept(this);
+			}
+			printToken("}");
 			printFeatures(nonTerminal,false);
 			return false;
 		}
