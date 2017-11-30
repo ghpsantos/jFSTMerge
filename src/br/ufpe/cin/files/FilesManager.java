@@ -332,7 +332,7 @@ public final class FilesManager {
 		for(File f : files){
 			if(f!=null && !f.exists()){
 				System.err.println(f.getAbsolutePath()+" does not exists! Try again with a valid file.");
-				System.exit(-1);
+				throw new RuntimeException(f.getAbsolutePath()+" does not exists! Try again with a valid file.");
 			}
 		}
 	}

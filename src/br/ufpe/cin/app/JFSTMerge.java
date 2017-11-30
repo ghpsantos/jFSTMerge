@@ -104,7 +104,7 @@ public class JFSTMerge {
 			e.printStackTrace();
 			System.err.println("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 			LOGGER.log(Level.SEVERE, "", e);
-			System.exit(-1);
+            throw new RuntimeException("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 		}
 		return scenario;
 	}
@@ -135,7 +135,7 @@ public class JFSTMerge {
 				} catch (PrintException pe) {
 					System.err.println("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 					LOGGER.log(Level.SEVERE, "", pe);
-					System.exit(-1);
+					throw new RuntimeException("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 				}
 			}
 		}
@@ -173,7 +173,7 @@ public class JFSTMerge {
 			} catch (TextualMergeException tme) { //textual merge must work even when semistructured not, so this exception precedes others
 				System.err.println("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 				LOGGER.log(Level.SEVERE, "", tme);
-				System.exit(-1);
+                throw new RuntimeException("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 			} catch (SemistructuredMergeException sme) {
 				LOGGER.log(Level.WARNING, "", sme);
 				context.semistructuredOutput = context.unstructuredOutput;
@@ -192,7 +192,7 @@ public class JFSTMerge {
 		} catch (PrintException pe) {
 			System.err.println("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 			LOGGER.log(Level.SEVERE, "", pe);
-			System.exit(-1);
+            throw new RuntimeException("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 		}
 
 		//computing statistics
@@ -201,7 +201,7 @@ public class JFSTMerge {
 		} catch (Exception e) {
 			System.err.println("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 			LOGGER.log(Level.SEVERE, "", e);
-			System.exit(-1);
+            throw new RuntimeException("An error occurred. See " + LoggerFactory.logfile + " file for more details.\n Send the log to gjcc@cin.ufpe.br for analysis if preferable.");
 		}
 		System.out.println("Merge files finished.");
 		return context;
