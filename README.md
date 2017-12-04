@@ -4,11 +4,11 @@
 jFSTMerge
 ========
 
-Copyright (c) 2016 by the Federal University of Pernambuco.
+Copyright (c) 2017 by the Federal University of Pernambuco.
 
-A semistructured merge tool for Java applications.
+A semistructured merge tool for CSS files.
 
-Contact Guilherme Cavalcanti &lt;<gjcc@cin.ufpe.br>&gt;.
+Contact Guilherme Cavalcanti &lt;<gjcc@cin.ufpe.br>&gt; and Guilherme Henrique &lt;<ghps@cin.ufpe.br>&gt;.
 
 Compilation
 -----------
